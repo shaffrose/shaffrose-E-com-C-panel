@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="shortcut icon" href="./C-_Users_USER_Downloads_FI-LOGO.png" type="image/x-icon">
+  <link rel="manifest" href="/manifest.json">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Address Labels</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: rgb(39, 39, 39);
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .divb {
+      height: 60px;
+      width: 100%;
+      background-color: rgb(255, 255, 255);
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 15px;
+      position: sticky;
+      top: 0;
+      color: rgb(0, 0, 0);
+    }
+
+    .logo-container img {
+      height: 40px;
+      width: auto;
+      max-width: 150px;
+    }
+
+    .nav-links {
+      display: none;
+    }
+
+    .cart-icon {
+      font-size: 20px;
+    }
+
+    .main {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 15px;
+      margin-top: 10px;
+    }
+
+    textarea, button {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 10px;
+      font-size: 16px;
+      box-sizing: border-box;
+      border: none;
+      outline: none;
+    }
+
+    textarea {
+      height: 100px;
+      border-radius: 15px;
+      resize: vertical;
+    }
+
+    button {
+      height: 50px;
+      border-radius: 15px;
+      background-color: white;
+      color: rgb(38, 0, 255);
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #f0f0f0;
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    #labels {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 20px;
+      width: 100%;
+    }
+
+    .label {
+      width: 100%;
+      overflow: hidden;
+      white-space: pre-wrap;
+      font-size: 14px;
+      border: 1px dashed #ccc;
+      background-color: rgb(255, 255, 255);
+      border-radius: 15px;
+    }
+
+    @media (max-width: 400px) {
+      textarea { height: 80px; font-size: 14px; }
+      button { height: 45px; font-size: 15px; }
+      .label { padding: 12px 15px; min-height: 140px; font-size: 13px; }
+    }
+
+    @media (min-width: 600px) {
+      .divb { padding: 0 30px; }
+      .nav-links {
+        display: flex;
+        flex-direction: row;
+        gap: 30px;
+      }
+      #labels { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+      textarea { width: 80%; border-radius: 20px; }
+      button { width: 60%; border-radius: 20px; }
+    }
+
+    @media (min-width: 768px) {
+      #labels { grid-template-columns: repeat(3, 1fr); }
+      textarea { width: 70%; }
+      button { width: 50%; }
+    }
+
+    @media (min-width: 900px) {
+      .divb { height: 80px; padding: 0 50px; }
+      .logo-container img { height: 55px; }
+      .nav-links { gap: 100px; margin-left: -1300px; }
+      #labels { grid-template-columns: repeat(3, 1fr); column-gap: 20px; row-gap: 20px; max-width: 900px; }
+      textarea { width: 850px; border-radius: 30px; }
+      button { width: 350px; border-radius: 30px; }
+      button:nth-child(3) { width: 450px; }
+    }
+
+    @media print {
+      @page { margin: 0; size: A4 portrait; }
+
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: rgb(255, 255, 255);
+      }
+
+      .divb, textarea, button, h1, h2, u, p {
+        display: none;
+      }
+
+      #labels {
+        grid-template-columns: repeat(3, 1fr);
+        column-gap: 0.3cm;
+        row-gap: 1cm;
+        margin: 0;
+        max-width: 100%;
+      }
+
+      .label {
+        page-break-inside: avoid;
+        border: none;
+        min-height: 0;
+        height: auto;
+        border-radius: 0;
+        font-weight: bold;
+        padding: 10px;
+        font-size: 14px;
+      }
+    }
+
+    .mybutton {
+      padding: 10px 20px;
+      background-color: #4248f5;
+      color: white;
+      border: 2px solid white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .mybutton:hover {
+      background-color: rgb(0, 255, 42);
+    }
+  </style>
+</head>
+<body>
+  <div class="divb">
+    <div class="logo-container">
+      <img src="https://lh3.googleusercontent.com/tTbnpxBlF2ymAwmxu3kszfV7vnRXK8vDELSTjSRAvICkC3bPWpFit-KaYz1XaZPgrGHV8LJ28OK8wJjOxw=s265-w265-h265" alt="Shaffrose Logo">
+    </div>
+    <div class="nav-links">
+      <p>Home</p>
+      <p>Product</p>
+      <p>About</p>
+    </div>
+    <div class="cart-icon">
+      <p>🛒</p>
+    </div>
+  </div>
+
+  <div class="main">
+    <u style="color: white;"><h1 style="color: white;">SORT ADDRESS</h1></u>
+    <textarea id="addressInput" placeholder="Paste addresses here...." style="border:6px groove rgb(0,0,0);"></textarea>
+
+    <button onclick="generateLabels()" class="mybutton">Generate Labels</button>
+    <button onclick="window.print()" class="mybutton">Print Labels</button>
+
+    
+
+    <div id="labels"></div>
+  </div>
+
+  <div class="footer" style="height: 100px; width: 100%; background-color: #fff; margin-top: 400px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+    <p style="font-size: 15px; font-weight: bold; margin-top: 20px;">Copyright © 2025 Powered By SHAFFROSE®</p>
+    <p style="font-size: 15px; font-weight: bold;">Designed by Shahzad Edathingal</p>
+  </div>
+
+  <script>
+    function generateLabels() {
+      const input = document.getElementById('addressInput').value.trim();
+      const addresses = input.split(/\n\s*\n/);
+      const labelsDiv = document.getElementById('labels');
+
+      labelsDiv.innerHTML = '';
+
+      if (addresses.length === 1 && addresses[0] === '') {
+        alert('Please enter at least one address');
+        return;
+      }
+
+      addresses.forEach(addr => {
+        if (addr.trim() === '') return;
+
+        const label = document.createElement('div');
+        label.className = 'label';
+
+        let processedAddress = addr.trim().split('\n').map((line, index) => {
+          if (index === 0) {
+            line = "TO, " + line.trim();
+          }
+
+          line = transliterateToManglish(line);
+
+          if (/^\d{6}$/.test(line) && !line.startsWith('Pin-')) {
+            line = 'Pin-' + line;
+          }
+
+          if (/^\+91\s?\d{10}$/.test(line) && !line.startsWith('Mob-')) {
+            line = 'Mob-' + line;
+          } else if (/^\d{10}$/.test(line) && !line.startsWith('Mob-')) {
+            line = 'Mob-' + line;
+          }
+
+          return line;
+        }).join('\n');
+
+        label.textContent = processedAddress;
+        labelsDiv.appendChild(label);
+      });
+    }
+
+    function transliterateToManglish(text) {
+      const malayalamToManglish = {
+        'ക': 'ka', 'ഖ': 'kha', 'ഗ': 'ga', 'ഘ': 'gha', 'ങ': 'nga',
+        'ച': 'cha', 'ഛ': 'chha', 'ജ': 'ja', 'ഝ': 'jha', 'ഞ': 'nja',
+        'ട': 'ṭa', 'ഠ': 'ṭha', 'ഡ': 'ḍa', 'ഢ': 'ḍha', 'ണ': 'ṇa',
+        'ത': 'ta', 'ഥ': 'tha', 'ദ': 'da', 'ധ': 'dha', 'ന': 'na',
+        'പ': 'pa', 'ഫ': 'pha', 'ബ': 'ba', 'ഭ': 'bha', 'മ': 'ma',
+        'യ': 'ya', 'ര': 'ra', 'റ': 'ṟa', 'ല': 'la', 'ള': 'ḷa',
+        'വ': 'va', 'ശ': 'sha', 'ഷ': 'ṣa', 'സ': 'sa', 'ഹ': 'ha',
+        'ള': 'la', 'ഴ': 'ḻa', 'വ': 'va', 'റ്റ': 'ṭa'
+      };
+      return text.split('').map(char => malayalamToManglish[char] || char).join('');
+    }
+  </script>
+</body>
+</html>
