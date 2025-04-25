@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 50px;
+        }
+        input {
+            margin: 10px;
+            padding: 10px;
+        }
+        button {
+            padding: 10px 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Login Page</h2>
+
+    <input type="text" id="userId" placeholder="Enter ID"><br>
+    <input type="password" id="password" placeholder="Enter Password"><br>
+    <button onclick="checkLogin()">Login</button>
+
+    <p id="message"></p>
+
+    <script>
+        var correctId = "admin";
+        var correctPassword = "shaff1212@";
+
+        function checkLogin() {
+            var enteredId = document.getElementById("userId").value;
+            var enteredPassword = document.getElementById("password").value;
+
+            if (enteredId === correctId && enteredPassword === correctPassword) {
+                // പാസ്‌വേഡ് ശരിയാണെങ്കിൽ index.html പേജിലേക്ക് പോകുന്നു
+                window.location.href = "main.html";
+            } else {
+                document.getElementById("message").innerHTML = "Incorrect ID or Password.";
+            }
+        }
+    </script>
+
+</body>
+</html>
