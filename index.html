@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Advanced Login Page</title>
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
@@ -14,6 +18,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            padding: 10px;
         }
 
         .login-container {
@@ -21,32 +26,35 @@
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 350px;
+            width: 100%;
+            max-width: 400px;
             text-align: center;
-            border: 20px groove black;
+            border: 10px groove black;
         }
 
         .login-container h2 {
             margin-bottom: 20px;
+            font-size: 28px;
         }
 
         .login-container input {
-            width: 330px;
-            padding: 10px;
+            width: 100%;
+            padding: 12px;
             margin: 10px 0;
             border-radius: 5px;
             border: 1px solid #ccc;
-            cursor: pointer;
+            font-size: 16px;
         }
 
         .login-container button {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             background-color: #000000;
-            color: rgb(255, 255, 255);
+            color: #ffffff;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 16px;
         }
 
         .login-container button:hover {
@@ -72,6 +80,23 @@
         .forgot-password:hover {
             text-decoration: underline;
         }
+
+        /* Media query for larger screens */
+        @media (min-width: 768px) {
+            .login-container {
+                padding: 40px;
+                max-width: 500px;
+            }
+
+            .login-container h2 {
+                font-size: 32px;
+            }
+
+            .login-container input,
+            .login-container button {
+                font-size: 18px;
+            }
+        }
     </style>
 </head>
 
@@ -90,49 +115,37 @@
     </div>
 
     <script>
-        // Correct credentials (can be replaced with API calls in production)
         const correctId = "admin";
         const correctPassword = "shaff1212@";
 
-        // Function to check login
         function checkLogin() {
-            // Get entered values
             const enteredId = document.getElementById("userId").value;
             const enteredPassword = document.getElementById("password").value;
 
-            // Reset messages
             document.getElementById("error-message").textContent = "";
             document.getElementById("success-message").textContent = "";
 
-            // Validation: Check if fields are empty
             if (enteredId === "" || enteredPassword === "") {
                 document.getElementById("error-message").textContent = "Both fields are required.";
                 return;
             }
 
-            // Check if credentials are correct
             if (enteredId === correctId && enteredPassword === correctPassword) {
-                // Store login status in localStorage (to simulate session management)
                 localStorage.setItem("loggedIn", true);
                 localStorage.setItem("userId", enteredId);
-
-                // Show success message
                 document.getElementById("success-message").textContent = "Login Successful! Redirecting...";
-
-                // Redirect after 2 seconds (to simulate a delay)
-                setTimeout(function() {
-                    window.location.href = "main.html"; // Replace with the page you want to redirect to
+                setTimeout(function () {
+                    window.location.href = "main.html";
                 }, 2000);
             } else {
                 document.getElementById("error-message").textContent = "Incorrect Username or Password.";
             }
         }
 
-        // Check if the user is already logged in
-        window.onload = function() {
+        window.onload = function () {
             const loggedIn = localStorage.getItem("loggedIn");
             if (loggedIn) {
-                window.location.href = "main.html"; // Redirect to the main page if logged in
+                window.location.href = "main.html";
             }
         }
     </script>
