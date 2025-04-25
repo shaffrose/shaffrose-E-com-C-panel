@@ -319,7 +319,9 @@
       <p>Home</p>
       <p>Product</p>
       <p>About</p>
+      <p onclick="logout()">Logout</p> <!-- 👈 This is new -->
     </div>
+    
     
  
   </div>
@@ -458,6 +460,16 @@
     function toggleMenu() {
   const navMenu = document.getElementById("navMenu");
   navMenu.classList.toggle("show");
+}
+
+
+function logout() {
+  // Clear session data if any (e.g., localStorage or sessionStorage)
+  localStorage.clear();
+  sessionStorage.clear();
+
+  // Redirect to login page
+  window.location.href = 'index.html'; // 👈 Change this to your actual login page
 }
 
     
