@@ -21,6 +21,7 @@
             padding: 10px;
         }
 
+
         .login-container {
             background-color: rgb(247, 39, 94);
             padding: 30px;
@@ -101,8 +102,10 @@
 </head>
 
 <body>
+    <div style=" display: flex; flex-direction: column;  margin-top: -500px;" >
+    <img src="./C-_Users_USER_Downloads_FI-LOGO.png" alt="" style="height: 150px;width: 300px; margin-top: 400px; margin-left: 20px;">
 
-    <div class="login-container">
+    <div class="login-container" style="margin-top: 50px;">
         <h2>Login</h2>
         <input type="text" id="userId" placeholder="Enter Id" required><br>
         <input type="password" id="password" placeholder="Enter Password" required><br>
@@ -113,7 +116,7 @@
 
         <a href="#" class="forgot-password">Forgot Password?</a>
     </div>
-
+</div>
     <script>
         const correctId = "admin";
         const correctPassword = "shaff1212@";
