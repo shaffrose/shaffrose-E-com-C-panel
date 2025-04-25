@@ -3,13 +3,13 @@
 
 <head>
   <link rel="shortcut icon" href="./C-_Users_USER_Downloads_FI-LOGO.png" type="image/x-icon">
-  <link rel="manifest" href="/manifest.json">
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Address Labels</title>
   <style>
     * {
       box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
@@ -17,10 +17,11 @@
       font-family: sans-serif;
       margin: 0;
       padding: 0;
+      touch-action: manipulation;
     }
 
     header {
-      padding: 20px 50px;
+      padding: 15px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -30,29 +31,33 @@
       left: 0;
       right: 0;
       z-index: 10;
-      transition: all 0.3s ease;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
     }
 
     header img {
-      height: 60px;
+      height: 40px;
+      width: auto;
     }
 
     header h1 {
       color: #FFDB58;
-      font-size: 2rem;
+      font-size: 1.3rem;
       font-weight: 700;
       margin: 0;
+      display: none;
     }
 
     nav {
       display: flex;
-      gap: 30px;
+      gap: 15px;
     }
 
     nav a {
       color: #fff;
       text-decoration: none;
       font-weight: 600;
+      font-size: 0.9rem;
+      padding: 5px 0;
       transition: color 0.3s ease;
     }
 
@@ -65,15 +70,15 @@
       flex-direction: column;
       gap: 5px;
       cursor: pointer;
+      padding: 10px;
+      margin-left: auto;
     }
 
     .hamburger div {
-      width: 30px;
-      height: 4px;
+      width: 25px;
+      height: 3px;
       background-color: #fff;
       border-radius: 5px;
-      margin-left: 350px;
-      margin-top: -16px;
       transition: all 0.3s ease;
     }
 
@@ -83,38 +88,46 @@
       justify-content: center;
       align-items: center;
       padding: 15px;
-      margin-top: 100px;
-    }
-
-    textarea,
-    button {
+      margin-top: 70px;
+      margin-bottom: 70px;
       width: 100%;
-      padding: 12px;
-      margin-bottom: 10px;
-      font-size: 16px;
-      box-sizing: border-box;
-      border: none;
-      outline: none;
     }
 
     textarea {
-      height: 100px;
-      border-radius: 15px;
+      width: 100%;
+      padding: 15px;
+      margin-bottom: 15px;
+      font-size: 16px;
+      border: 3px solid #000;
+      border-radius: 10px;
       resize: vertical;
+      min-height: 120px;
+      background-color: #fff;
+    }
+
+    .button-group {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 15px;
     }
 
     button {
-      height: 50px;
-      border-radius: 15px;
-      background-color: white;
-      color: rgb(38, 0, 255);
+      width: 100%;
+      padding: 15px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 10px;
+      background-color: #4248f5;
+      color: white;
       font-weight: bold;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.2s ease;
     }
 
     button:hover {
-      background-color: #f0f0f0;
+      background-color: #2a30d3;
     }
 
     button:active {
@@ -124,198 +137,146 @@
     #labels {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 10px;
-      margin-top: 20px;
+      gap: 12px;
       width: 100%;
     }
 
     .label {
-      width: 100%;
-      overflow: hidden;
-      white-space: pre-wrap;
+      padding: 12px;
       font-size: 14px;
       border: 1px dashed #ccc;
-      background-color: rgb(255, 255, 255);
-      border-radius: 15px;
+      background-color: white;
+      border-radius: 10px;
+      word-break: break-word;
     }
 
     .footer {
-      height: 60px;
+      padding: 10px;
       width: 100%;
-      background-color: #fff;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      background-color: #000;
+      color: white;
+      text-align: center;
       position: fixed;
       bottom: 0;
       left: 0;
     }
 
     .footer p {
-      font-size: 15px;
-      font-weight: bold;
-      margin: 0;
+      font-size: 0.8rem;
+      margin: 3px 0;
     }
 
-    .mybutton {
-      padding: 10px 20px;
-      background-color: #4248f5;
-      color: white;
-      border: 2px solid white;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .mybutton:hover {
-      background-color: rgb(0, 255, 42);
-    }
-
+    /* Mobile Menu Styles */
     @media (max-width: 768px) {
       header {
-        flex-direction: column;
-        align-items: flex-start;
+        padding: 10px 15px;
+        flex-wrap: wrap;
       }
 
-      header img {
-        height: 50px;
+      header h1 {
+        display: block;
+        font-size: 1.1rem;
+        order: 1;
+        width: 100%;
+        text-align: center;
+        margin-top: 5px;
       }
 
       nav {
         display: none;
         flex-direction: column;
-        gap: 20px;
-        position: absolute;
-        top: 70px;
+        position: fixed;
+        top: 60px;
+        left: 0;
         right: 0;
-        background-color: #000000;
-        width: 100%;
-        height: 100vh;
-        justify-content: center;
+        background-color: #000;
+        padding: 20px;
+        box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+        z-index: 100;
       }
 
       nav a {
-        font-size: 1.5rem;
-        margin: 20px 0;
+        padding: 12px;
+        font-size: 1rem;
+        border-bottom: 1px solid #333;
       }
 
       .hamburger {
         display: flex;
+        margin-left: 0;
       }
 
-      .hamburger.active div:nth-child(1) {
-        transform: rotate(45deg) translateY(10px);
+      .main {
+        margin-top: 60px;
+        padding: 10px;
       }
 
-      .hamburger.active div:nth-child(2) {
-        opacity: 0;
+      textarea {
+        font-size: 15px;
+        padding: 12px;
       }
 
-      .hamburger.active div:nth-child(3) {
-        transform: rotate(-45deg) translateY(-10px);
-      }
-
-      nav.active {
-        display: flex;
-      }
-
-      .main textarea {
-        width: 80%;
-      }
-
-      .footer p {
-        font-size: 12px;
+      button {
+        padding: 12px;
+        font-size: 0.95rem;
       }
     }
 
+    /* Tablet Styles */
     @media (min-width: 600px) {
       #labels {
         grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-      }
-
-      textarea {
-        width: 80%;
-      }
-
-      button {
-        width: 60%;
       }
     }
 
-    @media (min-width: 768px) {
-      #labels {
-        grid-template-columns: repeat(3, 1fr);
-      }
-
-      textarea {
-        width: 70%;
-      }
-
-      button {
-        width: 50%;
-      }
-    }
-
+    /* Desktop Styles */
     @media (min-width: 900px) {
       #labels {
         grid-template-columns: repeat(3, 1fr);
-        column-gap: 20px;
-        row-gap: 20px;
         max-width: 900px;
       }
 
       textarea {
-        width: 850px;
+        max-width: 800px;
+      }
+
+      .button-group {
+        max-width: 800px;
+        flex-direction: row;
       }
 
       button {
-        width: 350px;
-      }
-
-      button:nth-child(3) {
-        width: 450px;
+        flex: 1;
       }
     }
 
+    /* Print Styles */
     @media print {
-      @page {
-        margin: 0;
-        size: A4 portrait;
+      header, .footer, button, textarea {
+        display: none !important;
       }
 
       body {
+        background-color: white;
         margin: 0;
         padding: 0;
-        background-color: rgb(255, 255, 255);
       }
 
-      textarea,
-      button,
-      h1,
-      h2,
-      u,
-      p {
-        display: none;
+      .main {
+        margin: 0;
+        padding: 0;
       }
 
       #labels {
         grid-template-columns: repeat(3, 1fr);
-        column-gap: 0.3cm;
-        row-gap: 1cm;
-        margin: 0;
-        max-width: 100%;
+        gap: 0.5cm 0.3cm;
       }
 
       .label {
-        page-break-inside: avoid;
         border: none;
-        min-height: 0;
-        height: auto;
-        border-radius: 0;
-        font-weight: bold;
-        padding: 10px;
-        font-size: 14px;
+        padding: 0.5cm;
+        font-size: 12px;
+        page-break-inside: avoid;
       }
     }
   </style>
@@ -323,32 +284,36 @@
 
 <body>
   <header>
-    <img src="./C-_Users_USER_Downloads_FI-LOGO.png" alt="">
-    <nav>
-      <a href="home.html">Home</a>
-      <a href="sorter.html">A-Sorter</a>
-      <a href="#contact">Contact</a>
-      <a href="index.html" onclick="logout(event)">Logout</a>
-    </nav>
-    
+    <img src="./C-_Users_USER_Downloads_FI-LOGO.png" alt="Logo">
+
     <div class="hamburger" onclick="toggleMenu()">
       <div></div>
       <div></div>
       <div></div>
     </div>
+    <nav>
+      <a href="home.html">Home</a>
+      <a href="sorter.html">A-Sorter</a>
+      <a href="#contact">Contact</a>
+      <a href="#" onclick="logout(event)">Logout</a>
+    </nav>
   </header>
 
   <div class="main">
-    <u style="color: white;">
-      <h1 style="color: white;">SORT ADDRESS</h1>
-    </u>
-    <textarea id="addressInput" placeholder="Paste addresses here...." style="border:6px groove rgb(0,0,0); width: 450px;"></textarea>
-
-    <button onclick="generateLabels()" class="mybutton">Generate Labels</button>
-    <button onclick="window.print()" class="mybutton">Print Labels</button>
-
+    <h1 style="color: #FFDB58; font-size: 1.5rem; font-weight: 700; text-align: center; margin-bottom: 15px;">
+      SORT ADDRESS
+    </h1>
+  
+    <textarea id="addressInput" placeholder="Paste addresses here..."></textarea>
+  
+    <div class="button-group">
+      <button onclick="generateLabels()">Generate Labels</button>
+      <button onclick="window.print()">Print Labels</button>
+    </div>
+  
     <div id="labels"></div>
   </div>
+  
 
   <div class="footer">
     <p>Copyright © 2025 Powered By SHAFFROSE ®</p>
@@ -401,39 +366,25 @@
       });
     }
 
-    // Logout Function (Fixed)
+    // Logout Function
     function logout(event) {
       event.preventDefault();
-      localStorage.clear(); // Clear all stored data
-      window.location.replace("index.html"); // Force redirect (no going back)
+      localStorage.clear();
+      window.location.replace("index.html");
     }
 
     // Transliterate Malayalam to Manglish
     function transliterateToManglish(text) {
-      const compoundLetters = {
-        'ക്ക': 'kka', 'ക്ഷ': 'ksha', 'ഗ്ഗ': 'gga', 'ങ്ങ': 'nga',
-        'ച്ച': 'ccha', 'ജ്ജ': 'jja', 'ഞ്ഞ': 'nja', 'ട്ട': 'tta',
-        'ണ്ണ': 'nna', 'ത്ത': 'tha', 'ദ്ദ': 'dda', 'ദ്ധ': 'ddha',
-        'ന്ന': 'nna', 'ന്ത': 'ntha', 'ന്ദ': 'nda', 'മ്മ': 'mma',
-        'മ്പ': 'mpa', 'പ്പ': 'ppa', 'വ്വ': 'vva', 'ല്ല': 'lla',
-        'ള്ള': 'lla', 'ശ്ശ': 'sha', 'സ്സ': 'ssa', 'ഹ്മ': 'hma',
-        '്ര': 'ra', '്യ': 'ya', '്ല': 'la', '്വ': 'va', 'ന്റ': 'nta',
-      };
-
       const malayalamToManglish = {
         'അ': 'a', 'ആ': 'aa', 'ഇ': 'i', 'ഈ': 'ee', 'ഉ': 'u', 'ഊ': 'oo',
         'ഋ': 'ru', 'എ': 'e', 'ഏ': 'e', 'ഐ': 'ai', 'ഒ': 'o', 'ഓ': 'oo', 'ഔ': 'au',
-        'ാ': 'aa', 'ി': 'i', 'ീ': 'ee', 'ു': 'u', 'ൂ': 'oo', 'ൃ': 'ru',
-        'െ': 'e', 'േ': 'e', 'ൈ': 'ai', 'ൊ': 'o', 'ോ': 'o', 'ൌ': 'au',
         'ക': 'ka', 'ഖ': 'kha', 'ഗ': 'ga', 'ഘ': 'gha', 'ങ': 'nga',
         'ച': 'cha', 'ഛ': 'chha', 'ജ': 'ja', 'ഝ': 'jha', 'ഞ': 'nya',
         'ട': 'tta', 'ഠ': 'ttha', 'ഡ': 'dda', 'ഢ': 'ddha', 'ണ': 'nna',
         'ത': 'tha', 'ഥ': 'thha', 'ദ': 'da', 'ധ': 'dha', 'ന': 'na',
         'പ': 'pa', 'ഫ': 'pha', 'ബ': 'ba', 'ഭ': 'bha', 'മ': 'ma',
         'യ': 'ya', 'ര': 'ra', 'ല': 'la', 'വ': 'va', 'ശ': 'sha',
-        'ഷ': 'sha', 'സ': 'sa', 'ഹ': 'ha', 'ള': 'la', 'ഴ': 'zha', 'റ': 'ra',
-        'ൽ': 'l', 'ൾ': 'l', 'ൺ': 'n', 'ൻ': 'n', '്': '',
-        'ൿ': 'k'
+        'ഷ': 'sha', 'സ': 'sa', 'ഹ': 'ha', 'ള': 'la', 'ഴ': 'zha', 'റ': 'ra'
       };
 
       return text.split('').map(char => malayalamToManglish[char] || char).join('');
@@ -445,6 +396,19 @@
       const hamburger = document.querySelector('.hamburger');
       menu.classList.toggle('active');
       hamburger.classList.toggle('active');
+      
+      // Close menu when clicking outside
+      if (menu.classList.contains('active')) {
+        document.addEventListener('click', closeMenuOnClickOutside);
+      } else {
+        document.removeEventListener('click', closeMenuOnClickOutside);
+      }
+    }
+
+    function closeMenuOnClickOutside(e) {
+      if (!e.target.closest('nav') && !e.target.closest('.hamburger')) {
+        toggleMenu();
+      }
     }
   </script>
 </body>
