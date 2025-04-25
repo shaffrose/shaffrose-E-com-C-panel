@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <link rel="shortcut icon" href="./C-_Users_USER_Downloads_FI-LOGO.png" type="image/x-icon">
   <link rel="manifest" href="/manifest.json">
@@ -10,6 +11,51 @@
     * {
       box-sizing: border-box;
     }
+
+
+
+
+
+    .menu-toggle {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+  user-select: none;
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: white;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+  }
+
+  .nav-links p {
+    margin: 10px 0;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .divb {
+    flex-wrap: wrap;
+  }
+}
+
 
     body {
       background-color: rgb(39, 39, 39);
@@ -55,7 +101,8 @@
       margin-top: 10px;
     }
 
-    textarea, button {
+    textarea,
+    button {
       width: 100%;
       padding: 12px;
       margin-bottom: 10px;
@@ -108,41 +155,106 @@
     }
 
     @media (max-width: 400px) {
-      textarea { height: 80px; font-size: 14px; }
-      button { height: 45px; font-size: 15px; }
-      .label { padding: 12px 15px; min-height: 140px; font-size: 13px; }
+      textarea {
+        height: 80px;
+        font-size: 14px;
+      }
+
+      button {
+        height: 45px;
+        font-size: 15px;
+      }
+
+      .label {
+        padding: 12px 15px;
+        min-height: 140px;
+        font-size: 13px;
+      }
     }
 
     @media (min-width: 600px) {
-      .divb { padding: 0 30px; }
+      .divb {
+        padding: 0 30px;
+      }
+
       .nav-links {
         display: flex;
         flex-direction: row;
         gap: 30px;
       }
-      #labels { grid-template-columns: repeat(2, 1fr); gap: 15px; }
-      textarea { width: 80%; border-radius: 20px; }
-      button { width: 60%; border-radius: 20px; }
+
+      #labels {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+      }
+
+      textarea {
+        width: 80%;
+        border-radius: 20px;
+      }
+
+      button {
+        width: 60%;
+        border-radius: 20px;
+      }
     }
 
     @media (min-width: 768px) {
-      #labels { grid-template-columns: repeat(3, 1fr); }
-      textarea { width: 70%; }
-      button { width: 50%; }
+      #labels {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      textarea {
+        width: 70%;
+      }
+
+      button {
+        width: 50%;
+      }
     }
 
     @media (min-width: 900px) {
-      .divb { height: 80px; padding: 0 50px; }
-      .logo-container img { height: 55px; }
-      .nav-links { gap: 100px; margin-left: -1300px; }
-      #labels { grid-template-columns: repeat(3, 1fr); column-gap: 20px; row-gap: 20px; max-width: 900px; }
-      textarea { width: 850px; border-radius: 30px; }
-      button { width: 350px; border-radius: 30px; }
-      button:nth-child(3) { width: 450px; }
+      .divb {
+        height: 80px;
+        padding: 0 50px;
+      }
+
+      .logo-container img {
+        height: 55px;
+      }
+
+      .nav-links {
+        gap: 100px;
+        margin-left: -1300px;
+      }
+
+      #labels {
+        grid-template-columns: repeat(3, 1fr);
+        column-gap: 20px;
+        row-gap: 20px;
+        max-width: 900px;
+      }
+
+      textarea {
+        width: 850px;
+        border-radius: 30px;
+      }
+
+      button {
+        width: 350px;
+        border-radius: 30px;
+      }
+
+      button:nth-child(3) {
+        width: 450px;
+      }
     }
 
     @media print {
-      @page { margin: 0; size: A4 portrait; }
+      @page {
+        margin: 0;
+        size: A4 portrait;
+      }
 
       body {
         margin: 0;
@@ -150,7 +262,13 @@
         background-color: rgb(255, 255, 255);
       }
 
-      .divb, textarea, button, h1, h2, u, p {
+      .divb,
+      textarea,
+      button,
+      h1,
+      h2,
+      u,
+      p {
         display: none;
       }
 
@@ -188,29 +306,34 @@
     }
   </style>
 </head>
+
 <body>
   <div class="divb">
     <div class="logo-container">
-      <img src="https://lh3.googleusercontent.com/tTbnpxBlF2ymAwmxu3kszfV7vnRXK8vDELSTjSRAvICkC3bPWpFit-KaYz1XaZPgrGHV8LJ28OK8wJjOxw=s265-w265-h265" alt="Shaffrose Logo">
+      <img
+        src="https://lh3.googleusercontent.com/tTbnpxBlF2ymAwmxu3kszfV7vnRXK8vDELSTjSRAvICkC3bPWpFit-KaYz1XaZPgrGHV8LJ28OK8wJjOxw=s265-w265-h265"
+        alt="Shaffrose Logo">
     </div>
-    <div class="nav-links">
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <div class="nav-links" id="navMenu">
       <p>Home</p>
       <p>Product</p>
       <p>About</p>
     </div>
-    <div class="cart-icon">
-      <p>🛒</p>
-    </div>
+    
+ 
   </div>
 
   <div class="main">
-    <u style="color: white;"><h1 style="color: white;">SORT ADDRESS</h1></u>
+    <u style="color: white;">
+      <h1 style="color: white;">SORT ADDRESS</h1>
+    </u>
     <textarea id="addressInput" placeholder="Paste addresses here...." style="border:6px groove rgb(0,0,0);"></textarea>
 
     <button onclick="generateLabels()" class="mybutton">Generate Labels</button>
     <button onclick="window.print()" class="mybutton">Print Labels</button>
 
-    
+
 
     <div id="labels"></div>
   </div>
@@ -227,104 +350,115 @@
   bottom: 0;
   left: 0;
 ">
-  <p style="font-size: 15px; font-weight: bold; margin: 0;">Copyright © 2025 Powered By SHAFFROSE ®</p>
-  <p style="font-size: 15px; font-weight: bold; margin: 3px 0 0 0;">Designed by Shahzad Edathingal</p>
-</div>
+    <p style="font-size: 15px; font-weight: bold; margin: 0;">Copyright © 2025 Powered By SHAFFROSE ®</p>
+    <p style="font-size: 15px; font-weight: bold; margin: 3px 0 0 0;">Designed by Shahzad Edathingal</p>
+  </div>
 
-<script>
-  function generateLabels() {
-    const input = document.getElementById('addressInput').value.trim();
-    const addresses = input.split(/\n\s*\n/);
-    const labelsDiv = document.getElementById('labels');
+  <script>
+    function generateLabels() {
+      const input = document.getElementById('addressInput').value.trim();
+      const addresses = input.split(/\n\s*\n/);
+      const labelsDiv = document.getElementById('labels');
 
-    labelsDiv.innerHTML = '';
+      labelsDiv.innerHTML = '';
 
-    if (addresses.length === 1 && addresses[0] === '') {
-      alert('Please enter at least one address');
-      return;
+      if (addresses.length === 1 && addresses[0] === '') {
+        alert('Please enter at least one address');
+        return;
+      }
+
+      addresses.forEach(addr => {
+        if (addr.trim() === '') return;
+
+        const label = document.createElement('div');
+        label.className = 'label';
+
+        let processedAddress = addr.trim().split('\n').map((line, index) => {
+          if (index === 0) {
+            line = "TO, " + line.trim();
+          }
+
+          line = transliterateToManglish(line);
+
+          // Convert to capital letters
+          line = line.toUpperCase();
+
+          if (/^\d{6}$/.test(line) && !line.startsWith('PIN-')) {
+            line = 'PIN-' + line;
+          }
+
+          if (/^\+91\s?\d{10}$/.test(line) && !line.startsWith('MOB-')) {
+            line = 'MOB-' + line;
+          } else if (/^\d{10}$/.test(line) && !line.startsWith('MOB-')) {
+            line = 'MOB-' + line;
+          }
+
+          return line;
+        }).join('\n');
+
+        label.textContent = processedAddress;
+        labelsDiv.appendChild(label);
+      });
     }
 
-    addresses.forEach(addr => {
-      if (addr.trim() === '') return;
+    function transliterateToManglish(text) {
+      // First handle compound letters (conjuncts)
+      const compoundLetters = {
+        'ക്ക': 'kka', 'ക്ഷ': 'ksha', 'ഗ്ഗ': 'gga', 'ങ്ങ': 'nga',
+        'ച്ച': 'ccha', 'ജ്ജ': 'jja', 'ഞ്ഞ': 'nja', 'ട്ട': 'tta',
+        'ണ്ണ': 'nna', 'ത്ത': 'tha', 'ദ്ദ': 'dda', 'ദ്ധ': 'ddha',
+        'ന്ന': 'nna', 'ന്ത': 'ntha', 'ന്ദ': 'nda', 'മ്മ': 'mma', 
+        'മ്പ': 'mpa', 'പ്പ': 'ppa', 'വ്വ': 'vva', 'ല്ല': 'lla', 
+        'ള്ള': 'lla', 'ശ്ശ': 'sha', 'സ്സ': 'ssa', 'ഹ്മ': 'hma', 
+        '്ര': 'ra', '്യ': 'ya', '്ല': 'la', '്വ': 'va', 'ന്റ': 'nta',
+        // Add more compound letters as needed
+      };
 
-      const label = document.createElement('div');
-      label.className = 'label';
+      // Then handle single characters
+      const malayalamToManglish = {
+        // Vowels and vowel signs
+        'അ': 'a', 'ആ': 'aa', 'ഇ': 'i', 'ഈ': 'ee', 'ഉ': 'u', 'ഊ': 'oo',
+        'ഋ': 'ru', 'എ': 'e', 'ഏ': 'e', 'ഐ': 'ai', 'ഒ': 'o', 'ഓ': 'oo', 'ഔ': 'au',
+        'ാ': 'aa', 'ി': 'i', 'ീ': 'ee', 'ു': 'u', 'ൂ': 'oo', 'ൃ': 'ru',
+        'െ': 'e', 'േ': 'e', 'ൈ': 'ai', 'ൊ': 'o', 'ോ': 'o', 'ൌ': 'au',
 
-      let processedAddress = addr.trim().split('\n').map((line, index) => {
-        if (index === 0) {
-          line = "TO, " + line.trim();
-        }
+        // Consonants
+        'ക': 'ka', 'ഖ': 'kha', 'ഗ': 'ga', 'ഘ': 'gha', 'ങ': 'nga',
+        'ച': 'cha', 'ഛ': 'chha', 'ജ': 'ja', 'ഝ': 'jha', 'ഞ': 'nya',
+        'ട': 'tta', 'ഠ': 'ttha', 'ഡ': 'dda', 'ഢ': 'ddha', 'ണ': 'nna',
+        'ത': 'tha', 'ഥ': 'thha', 'ദ': 'da', 'ധ': 'dha', 'ന': 'na',
+        'പ': 'pa', 'ഫ': 'pha', 'ബ': 'ba', 'ഭ': 'bha', 'മ': 'ma',
+        'യ': 'ya', 'ര': 'ra', 'ല': 'la', 'വ': 'va', 'ശ': 'sha',
+        'ഷ': 'sha', 'സ': 'sa', 'ഹ': 'ha', 'ള': 'la', 'ഴ': 'zha', 'റ': 'ra',
 
-        line = transliterateToManglish(line);
-        
-        // Convert to capital letters
-        line = line.toUpperCase();
+        // Chillus and other signs
+        'ൽ': 'l', 'ൾ': 'l', 'ൺ': 'n', 'ൻ': 'n', 'ർ': 'r', 'ൿ': 'k',
+        '്': '', // Virama (removes inherent vowel)
 
-        if (/^\d{6}$/.test(line) && !line.startsWith('PIN-')) {
-          line = 'PIN-' + line;
-        }
+        // Numbers
+        '൦': '0', '൧': '1', '൨': '2', '൩': '3', '൪': '4',
+        '൫': '5', '൬': '6', '൭': '7', '൮': '8', '൯': '9',
 
-        if (/^\+91\s?\d{10}$/.test(line) && !line.startsWith('MOB-')) {
-          line = 'MOB-' + line;
-        } else if (/^\d{10}$/.test(line) && !line.startsWith('MOB-')) {
-          line = 'MOB-' + line;
-        }
+        // Punctuation
+        '।': '.', '॥': '.', '?': '?', '!': '!', ',': ',', ';': ';', ':': ':',
+        '(': '(', ')': ')', '[': '[', ']': ']', '{': '{', '}': '}'
+      };
 
-        return line;
-      }).join('\n');
 
-      label.textContent = processedAddress;
-      labelsDiv.appendChild(label);
-    });
-  }
+      // First replace compound letters
+      Object.keys(compoundLetters).forEach(key => {
+        text = text.replace(new RegExp(key, 'g'), compoundLetters[key]);
+      });
 
-  function transliterateToManglish(text) {
-    // First handle compound letters (conjuncts)
-    const compoundLetters = {
-      'ക്ക': 'kka', 'ക്ഷ': 'ksha', 'ഗ്ഗ': 'gga', 'ങ്ങ': 'nga',
-      'ച്ച': 'ccha', 'ജ്ജ': 'jja', 'ഞ്ഞ': 'nja', 'ട്ട': 'tta',
-      'ണ്ണ': 'nna', 'ത്ത': 'tha','ത്ത': 'thi', 'ദ്ദ': 'dda', 'ദ്ധ': 'ddha',
-      'ന്ന': 'nna', 'ന്ത': 'ntha', 'മ്മ': 'mma', 'മ്പ': 'mpa',
-      'പ്പ': 'ppa', 'വ്വ': 'vva', 'ല്ല': 'lla', 'ള്ള': 'lla',
-      'ശ്ശ': 'ssha', 'സ്സ': 'ssa', 'ഹ്മ': 'hma', '്ര': 'ra',
-      '്യ': 'ya', '്ല': 'la', '്വ': 'va', 'ന്റ': 'nta'
-    };
+      // Then replace single characters
+      return text.split('').map(char => malayalamToManglish[char] || char).join('');
+    }
 
-    // Then handle single characters
-    const malayalamToManglish = {
-      // Vowels and vowel signs
-      'അ': 'a', 'ആ': 'aa', 'ഇ': 'e', 'ഈ': 'ee', 'ഉ': 'u', 'ഊ': 'oo',
-      'ഋ': 'ru', 'എ': 'e', 'ഏ': 'e', 'ഐ': 'ai', 'ഒ': 'o', 'ഓ': 'oo', 'ഔ': 'au',
-      'ാ': 'aa', 'ി': 'e', 'ീ': 'ee', 'ു': 'u', 'ൂ': 'oo', 'ൃ': 'ru',
-      'െ': 'e', 'േ': 'e', 'ൈ': 'ai', 'ൊ': 'o', 'ോ': 'o', 'ൌ': 'au',
-      
-      // Consonants
-      'ക': 'ka', 'ഖ': 'ga', 'ഗ': 'ga', 'ഘ': 'gha', 'ങ': 'nga',
-      'ച': 'cha', 'ഛ': 'chha', 'ജ': 'ja', 'ഝ': 'jha', 'ഞ': 'na',
-      'ട': 'da', 'ഠ': 'tha', 'ഡ': 'da', 'ഢ': 'dha', 'ണ': 'na',
-      'ത': 'tha', 'ഥ': 'thha', 'ദ': 'da', 'ധ': 'dha', 'ന': 'na',
-      'പ': 'pa', 'ഫ': 'fa', 'ബ': 'ba', 'ഭ': 'bha', 'മ': 'ma',
-      'യ': 'ya', 'ര': 'ra', 'ല': 'la', 'വ': 'va', 'ശ': 'sha',
-      'ഷ': 'sha', 'സ': 'sa', 'ഹ': 'ha', 'ള': 'la', 'ഴ': 'ya', 'റ': 'ra',
-      
-      // Chillus and other signs
-      'ൽ': 'l', 'ൾ': 'l', 'ൺ': 'n', 'ൻ': 'n', 'ർ': 'r', 'ൿ': 'k',
-      '്': '', // Virama (removes inherent vowel)
-      
-      // Numbers
-      '൦': '0', '൧': '1', '൨': '2', '൩': '3', '൪': '4', 
-      '൫': '5', '൬': '6', '൭': '7', '൮': '8', '൯': '9',
-      
-      // Punctuation
-      '।': '.', '॥': '.', '?': '?', '!': '!', ',': ',', ';': ';', ':': ':'
-    };
 
-    // First replace compound letters
-    Object.keys(compoundLetters).forEach(key => {
-      text = text.replace(new RegExp(key, 'g'), compoundLetters[key]);
-    });
+    function toggleMenu() {
+  const navMenu = document.getElementById("navMenu");
+  navMenu.classList.toggle("show");
+}
 
-    // Then replace single characters
-    return text.split('').map(char => malayalamToManglish[char] || char).join('');
-  }
-</script>
+    
+  </script>
