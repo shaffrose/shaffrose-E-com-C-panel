@@ -72,8 +72,8 @@
       height: 4px;
       background-color: #fff;
       border-radius: 5px;
-   margin-left: 350px;
-   margin-top: -16px;
+      margin-left: 350px;
+      margin-top: -16px;
       transition: all 0.3s ease;
     }
 
@@ -83,7 +83,7 @@
       justify-content: center;
       align-items: center;
       padding: 15px;
-      margin-top: 100px; /* Added space for header */
+      margin-top: 100px;
     }
 
     textarea,
@@ -201,7 +201,6 @@
 
       .hamburger {
         display: flex;
-        
       }
 
       .hamburger.active div:nth-child(1) {
@@ -319,7 +318,6 @@
         font-size: 14px;
       }
     }
-
   </style>
 </head>
 
@@ -330,10 +328,8 @@
       <a href="home.html">Home</a>
       <a href="sorter.html">A-Sorter</a>
       <a href="#contact">Contact</a>
-      <a href="#" onclick="logout()">Logout</a>
+      <a href="index.html" onclick="logout(event)">Logout</a>
     </nav>
-    
-    
     
     <div class="hamburger" onclick="toggleMenu()">
       <div></div>
@@ -360,6 +356,7 @@
   </div>
 
   <script>
+    // Generate Address Labels
     function generateLabels() {
       const input = document.getElementById('addressInput').value.trim();
       const addresses = input.split(/\n\s*\n/);
@@ -384,8 +381,6 @@
           }
 
           line = transliterateToManglish(line);
-
-          // Convert to capital letters
           line = line.toUpperCase();
 
           if (/^\d{6}$/.test(line) && !line.startsWith('PIN-')) {
@@ -406,20 +401,14 @@
       });
     }
 
+    // Logout Function (Fixed)
+    function logout(event) {
+      event.preventDefault();
+      localStorage.clear(); // Clear all stored data
+      window.location.replace("index.html"); // Force redirect (no going back)
+    }
 
-
-  function logout() {
-    // Optional: Clear session data or local storage
-    // localStorage.clear();
-
-    // Redirect to index.html
-    window.location.href = "index.html";
-  }
-
-
-
-
-
+    // Transliterate Malayalam to Manglish
     function transliterateToManglish(text) {
       const compoundLetters = {
         'ക്ക': 'kka', 'ക്ഷ': 'ksha', 'ഗ്ഗ': 'gga', 'ങ്ങ': 'nga',
@@ -450,6 +439,7 @@
       return text.split('').map(char => malayalamToManglish[char] || char).join('');
     }
 
+    // Mobile Menu Toggle
     function toggleMenu() {
       const menu = document.querySelector('nav');
       const hamburger = document.querySelector('.hamburger');
@@ -458,5 +448,4 @@
     }
   </script>
 </body>
-
 </html>
