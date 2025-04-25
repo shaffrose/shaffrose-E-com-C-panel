@@ -72,6 +72,8 @@
       height: 4px;
       background-color: #fff;
       border-radius: 5px;
+   margin-left: 350px;
+   margin-top: -16px;
       transition: all 0.3s ease;
     }
 
@@ -199,6 +201,7 @@
 
       .hamburger {
         display: flex;
+        
       }
 
       .hamburger.active div:nth-child(1) {
@@ -327,7 +330,11 @@
       <a href="home.html">Home</a>
       <a href="sorter.html">A-Sorter</a>
       <a href="#contact">Contact</a>
+      <a href="#" onclick="logout()">Logout</a>
     </nav>
+    
+    
+    
     <div class="hamburger" onclick="toggleMenu()">
       <div></div>
       <div></div>
@@ -339,7 +346,7 @@
     <u style="color: white;">
       <h1 style="color: white;">SORT ADDRESS</h1>
     </u>
-    <textarea id="addressInput" placeholder="Paste addresses here...." style="border:6px groove rgb(0,0,0);"></textarea>
+    <textarea id="addressInput" placeholder="Paste addresses here...." style="border:6px groove rgb(0,0,0); width: 450px;"></textarea>
 
     <button onclick="generateLabels()" class="mybutton">Generate Labels</button>
     <button onclick="window.print()" class="mybutton">Print Labels</button>
@@ -398,6 +405,20 @@
         labelsDiv.appendChild(label);
       });
     }
+
+
+
+  function logout() {
+    // Optional: Clear session data or local storage
+    // localStorage.clear();
+
+    // Redirect to index.html
+    window.location.href = "index.html";
+  }
+
+
+
+
 
     function transliterateToManglish(text) {
       const compoundLetters = {
