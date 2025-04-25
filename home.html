@@ -311,13 +311,12 @@
 
   <header>
    <img src="./C-_Users_USER_Downloads_FI-LOGO.png" alt="" style="height: 80px;">
-   <nav>
+   <nav id="navMenu">
     <a href="home.html">Home</a>
     <a href="sorter.html">A-Sorter</a>
     <a href="#contact">Contact</a>
-    <a href="#" onclick="logout()">Logout</a>
+    <a href="index.html" onclick="logout()">Logout</a>
   </nav>
-  
   
     <div class="hamburger" onclick="toggleMenu()">
       <div></div>
@@ -335,8 +334,8 @@
     </div>
   </section>
 
-  <section class="parallax" s>
-    <div class="parallax-text" >
+  <section class="parallax">
+    <div class="parallax-text">
         <p style="color: #000000;">To make your shopping easy <strong>SHAFFROSE AI</strong> E-com website</p>
     </div>
   </section>
@@ -346,11 +345,11 @@
     <div class="feature-list">
       <div class="feature"> 
         <h4>Vision</h4>
-        <p>"To become Kerala’s most trusted AI-powered commerce platform, empowering every local shop by bridging technology and tradition,offering affordability, visibility, and growth without compromising their identity."</p>
+        <p>"To become Kerala’s most trusted AI-powered commerce platform, empowering every local shop by bridging technology and tradition,offering affordability, visibility, and growth without compromising their identity."</p>
       </div>
       <div class="feature">
         <h4>Mission</h4>
-        <p>"To support and grow Kerala’s local businesses by using AI to connect physical shops with digital customers, offer the lowest prices, ensure safe and reliable 48-hour delivery, and preserve the unique character of every store we partner with."</p>
+        <p>"To support and grow Kerala’s local businesses by using AI to connect physical shops with digital customers, offer the lowest prices, ensure safe and reliable 48-hour delivery, and preserve the unique character of every store we partner with."</p>
       </div>
     </div>
   </section>
@@ -399,18 +398,16 @@
     }, {
       threshold: 0.2
     });
-      function logout() {
-    // Optional: Clear session data or local storage
-    // localStorage.clear();
-
-    // Redirect to index.html
-    window.location.href = "index.html";
-  }
-
-
-
 
     features.forEach(feature => observer.observe(feature));
+
+    function logout() {
+      // Optional: Clear session data or local storage
+      // localStorage.clear();
+
+      // Redirect to index.html
+      window.location.href = "index.html";
+    }
   </script>
 
 </body>
