@@ -311,11 +311,14 @@
 
   <header>
    <img src="./C-_Users_USER_Downloads_FI-LOGO.png" alt="" style="height: 80px;">
-    <nav id="navMenu">
-      <a href="home.html">Home</a>
-      <a href="sorter.html">A-Sorter</a>
-      <a href="#contact">Contact</a>
-    </nav>
+   <nav>
+    <a href="home.html">Home</a>
+    <a href="sorter.html">A-Sorter</a>
+    <a href="#contact">Contact</a>
+    <a href="#" onclick="logout()">Logout</a>
+  </nav>
+  
+  
     <div class="hamburger" onclick="toggleMenu()">
       <div></div>
       <div></div>
@@ -396,6 +399,16 @@
     }, {
       threshold: 0.2
     });
+      function logout() {
+    // Optional: Clear session data or local storage
+    // localStorage.clear();
+
+    // Redirect to index.html
+    window.location.href = "index.html";
+  }
+
+
+
 
     features.forEach(feature => observer.observe(feature));
   </script>
