@@ -230,62 +230,60 @@
 
     /* Media Query for Mobile */
     @media (max-width: 768px) {
-      header {
-        padding: 10px 15px;
-      }
-      
-      header img {
-        height: 60px !important;
-      }
+  nav {
+    display: none;
+    flex-direction: column;
+    gap: 15px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.95);
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+  }
 
-      nav {
-        display: none;
-        flex-direction: column;
-        gap: 15px;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: rgba(0, 0, 0, 0.95);
-        width: 100%;
-        height: 100vh;
-        justify-content: center;
-        align-items: center;
-        z-index: 5;
-      }
+  /* Add this rule to show the navigation menu when active */
+  nav.active {
+    display: flex;
+  }
 
-      nav a {
-        font-size: 1.5rem;
-        margin: 15px 0;
-        padding: 10px 20px;
-      }
+  nav a {
+    font-size: 1.5rem;
+    margin: 15px 0;
+    padding: 10px 20px;
+  }
 
-      .hamburger {
-        display: flex;
-      }
+  .hamburger {
+    display: flex;
+  }
 
-      .hero {
-        padding: 100px 15px 60px;
-      }
+  .hero {
+    padding: 100px 15px 60px;
+  }
 
-      .hero h2 {
-        font-size: 1.8rem;
-      }
+  .hero h2 {
+    font-size: 1.8rem;
+  }
 
-      .feature {
-        width: 100%;
-      }
+  .feature {
+    width: 100%;
+  }
 
-      .btn-group {
-        flex-direction: column;
-      }
+  .btn-group {
+    flex-direction: column;
+  }
 
-      .btn {
-        width: 80%;
-        max-width: 250px;
-      }
-    }
+  .btn {
+    width: 80%;
+    max-width: 250px;
+  }
+}
+
 
     /* Small mobile devices */
     @media (max-width: 480px) {
@@ -310,7 +308,7 @@
 <body>
 
   <header>
-    <img src="./C-_Users_USER_Downloads_FI-LOGO.png" alt="Logo">
+    <img src="./C-_Users_USER_Downloads_FI-LOGO.png" alt="Logo" style="height: 100px;">
 
     <div class="hamburger" onclick="toggleMenu()">
       <div></div>
@@ -361,31 +359,25 @@
   </footer>
 
   <script>
-    // Toggle navigation menu for mobile
-    function toggleMenu() {
-      const nav = document.getElementById('navMenu');
+   function toggleMenu() {
+      const menu = document.querySelector('nav');
       const hamburger = document.querySelector('.hamburger');
-      nav.classList.toggle('active');
+      menu.classList.toggle('active');
       hamburger.classList.toggle('active');
       
-      // Toggle body scroll when menu is open
-      if (nav.classList.contains('active')) {
-        document.body.style.overflow = 'hidden';
+      // Close menu when clicking outside
+      if (menu.classList.contains('active')) {
+        document.addEventListener('click', closeMenuOnClickOutside);
       } else {
-        document.body.style.overflow = 'auto';
+        document.removeEventListener('click', closeMenuOnClickOutside);
       }
     }
 
-    // Close menu when clicking on a link
-    document.querySelectorAll('nav a').forEach(link => {
-      link.addEventListener('click', () => {
-        const nav = document.getElementById('navMenu');
-        const hamburger = document.querySelector('.hamburger');
-        nav.classList.remove('active');
-        hamburger.classList.remove('active');
-        document.body.style.overflow = 'auto';
-      });
-    });
+    function closeMenuOnClickOutside(e) {
+      if (!e.target.closest('nav') && !e.target.closest('.hamburger')) {
+        toggleMenu();
+      }
+    }
 
     // Scroll animation for feature cards
     const features = document.querySelectorAll('.feature');
