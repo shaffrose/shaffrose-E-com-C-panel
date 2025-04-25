@@ -93,6 +93,7 @@
                 font-size: 32px;
             }
 
+
             .login-container input,
             .login-container button {
                 font-size: 18px;
@@ -138,7 +139,7 @@
                 localStorage.setItem("userId", enteredId);
                 document.getElementById("success-message").textContent = "Login Successful! Redirecting...";
                 setTimeout(function () {
-                    window.location.href = "main.html";
+                    window.location.href = "sorter.html";
                 }, 2000);
             } else {
                 document.getElementById("error-message").textContent = "Incorrect Username or Password.";
@@ -148,7 +149,7 @@
         window.onload = function () {
             const loggedIn = localStorage.getItem("loggedIn");
             if (loggedIn) {
-                window.location.href = "main.html";
+                window.location.href = "sorter.html";
             }
         }
     </script>
