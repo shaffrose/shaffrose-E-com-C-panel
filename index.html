@@ -139,7 +139,7 @@
                 localStorage.setItem("userId", enteredId);
                 document.getElementById("success-message").textContent = "Login Successful! Redirecting...";
                 setTimeout(function () {
-                    window.location.href = "home.html";
+                    window.location.href = "sorter.html";
                 }, 2000);
             } else {
                 document.getElementById("error-message").textContent = "Incorrect Username or Password.";
@@ -149,9 +149,25 @@
         window.onload = function () {
             const loggedIn = localStorage.getItem("loggedIn");
             if (loggedIn) {
-                window.location.href = "home.html";
+                window.location.href = "sorter.html";
             }
         }
+    
+    function login() {
+      const uid = document.getElementById("userid").value;
+      const pass = document.getElementById("password").value;
+
+      // Simple check - you can replace with real credentials or backend later
+      if (uid === "admin" && pass === "1234") {
+        localStorage.setItem("loggedIn", "true");
+        window.location.href = "home.html";
+      } else {
+        alert("തെറ്റായ User ID അല്ലെങ്കിൽ Password");
+      }
+    }
+
+
+        
     </script>
 
 </body>
