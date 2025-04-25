@@ -2,48 +2,141 @@
 <html lang="en">
 
 <head>
-    <title>Login Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Login Page</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            padding: 50px;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
-        input {
-            margin: 10px;
+
+        .login-container {
+            background-color: rgb(247, 39, 94);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+            border: 20px groove black;
+        }
+
+        .login-container h2 {
+            margin-bottom: 20px;
+        }
+
+        .login-container input {
+            width: 330px;
             padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            cursor: pointer;
         }
-        button {
-            padding: 10px 20px;
+
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #000000;
+            color: rgb(255, 255, 255);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .login-container button:hover {
+            background-color: #34be02;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+
+        .success-message {
+            color: green;
+            margin-top: 10px;
+        }
+
+        .forgot-password {
+            color: #007BFF;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 
 <body>
 
-    <h2>Login Page</h2>
+    <div class="login-container">
+        <h2>Login</h2>
+        <input type="text" id="userId" placeholder="Enter Id" required><br>
+        <input type="password" id="password" placeholder="Enter Password" required><br>
+        <button onclick="checkLogin()">Login</button>
 
-    <input type="text" id="userId" placeholder="Enter ID"><br>
-    <input type="password" id="password" placeholder="Enter Password"><br>
-    <button onclick="checkLogin()">Login</button>
+        <p id="error-message" class="error-message"></p>
+        <p id="success-message" class="success-message"></p>
 
-    <p id="message"></p>
+        <a href="#" class="forgot-password">Forgot Password?</a>
+    </div>
 
     <script>
-        var correctId = "admin";
-        var correctPassword = "shaff1212@";
+        // Correct credentials (can be replaced with API calls in production)
+        const correctId = "admin";
+        const correctPassword = "shaff1212@";
 
+        // Function to check login
         function checkLogin() {
-            var enteredId = document.getElementById("userId").value;
-            var enteredPassword = document.getElementById("password").value;
+            // Get entered values
+            const enteredId = document.getElementById("userId").value;
+            const enteredPassword = document.getElementById("password").value;
 
+            // Reset messages
+            document.getElementById("error-message").textContent = "";
+            document.getElementById("success-message").textContent = "";
+
+            // Validation: Check if fields are empty
+            if (enteredId === "" || enteredPassword === "") {
+                document.getElementById("error-message").textContent = "Both fields are required.";
+                return;
+            }
+
+            // Check if credentials are correct
             if (enteredId === correctId && enteredPassword === correctPassword) {
-                // പാസ്‌വേഡ് ശരിയാണെങ്കിൽ index.html പേജിലേക്ക് പോകുന്നു
-                window.location.href = "main.html";
+                // Store login status in localStorage (to simulate session management)
+                localStorage.setItem("loggedIn", true);
+                localStorage.setItem("userId", enteredId);
+
+                // Show success message
+                document.getElementById("success-message").textContent = "Login Successful! Redirecting...";
+
+                // Redirect after 2 seconds (to simulate a delay)
+                setTimeout(function() {
+                    window.location.href = "main.html"; // Replace with the page you want to redirect to
+                }, 2000);
             } else {
-                document.getElementById("message").innerHTML = "Incorrect ID or Password.";
+                document.getElementById("error-message").textContent = "Incorrect Username or Password.";
+            }
+        }
+
+        // Check if the user is already logged in
+        window.onload = function() {
+            const loggedIn = localStorage.getItem("loggedIn");
+            if (loggedIn) {
+                window.location.href = "main.html"; // Redirect to the main page if logged in
             }
         }
     </script>
 
 </body>
+
 </html>
