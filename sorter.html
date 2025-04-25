@@ -12,51 +12,6 @@
       box-sizing: border-box;
     }
 
-
-
-
-
-    .menu-toggle {
-  display: none;
-  font-size: 28px;
-  cursor: pointer;
-  user-select: none;
-}
-
-@media (max-width: 768px) {
-  .nav-links {
-    display: none;
-    position: absolute;
-    top: 60px;
-    right: 0;
-    background-color: white;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 10px 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    z-index: 10;
-  }
-
-  .nav-links p {
-    margin: 10px 0;
-    font-weight: bold;
-    cursor: pointer;
-  }
-
-  .nav-links.show {
-    display: flex;
-  }
-
-  .menu-toggle {
-    display: block;
-  }
-
-  .divb {
-    flex-wrap: wrap;
-  }
-}
-
-
     body {
       background-color: rgb(39, 39, 39);
       font-family: sans-serif;
@@ -64,32 +19,60 @@
       padding: 0;
     }
 
-    .divb {
-      height: 60px;
-      width: 100%;
-      background-color: rgb(255, 255, 255);
+    header {
+      padding: 20px 50px;
       display: flex;
-      flex-direction: row;
       justify-content: space-between;
       align-items: center;
-      padding: 0 15px;
-      position: sticky;
+      background-color: #000000;
+      position: fixed;
       top: 0;
-      color: rgb(0, 0, 0);
+      left: 0;
+      right: 0;
+      z-index: 10;
+      transition: all 0.3s ease;
     }
 
-    .logo-container img {
-      height: 40px;
-      width: auto;
-      max-width: 150px;
+    header img {
+      height: 60px;
     }
 
-    .nav-links {
+    header h1 {
+      color: #FFDB58;
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    nav {
+      display: flex;
+      gap: 30px;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #FFDB58;
+    }
+
+    .hamburger {
       display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
     }
 
-    .cart-icon {
-      font-size: 20px;
+    .hamburger div {
+      width: 30px;
+      height: 4px;
+      background-color: #fff;
+      border-radius: 5px;
+      transition: all 0.3s ease;
     }
 
     .main {
@@ -98,7 +81,7 @@
       justify-content: center;
       align-items: center;
       padding: 15px;
-      margin-top: 10px;
+      margin-top: 100px; /* Added space for header */
     }
 
     textarea,
@@ -154,35 +137,96 @@
       border-radius: 15px;
     }
 
-    @media (max-width: 400px) {
-      textarea {
-        height: 80px;
-        font-size: 14px;
+    .footer {
+      height: 60px;
+      width: 100%;
+      background-color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+    }
+
+    .footer p {
+      font-size: 15px;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    .mybutton {
+      padding: 10px 20px;
+      background-color: #4248f5;
+      color: white;
+      border: 2px solid white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .mybutton:hover {
+      background-color: rgb(0, 255, 42);
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
       }
 
-      button {
-        height: 45px;
-        font-size: 15px;
+      header img {
+        height: 50px;
       }
 
-      .label {
-        padding: 12px 15px;
-        min-height: 140px;
-        font-size: 13px;
+      nav {
+        display: none;
+        flex-direction: column;
+        gap: 20px;
+        position: absolute;
+        top: 70px;
+        right: 0;
+        background-color: #000000;
+        width: 100%;
+        height: 100vh;
+        justify-content: center;
+      }
+
+      nav a {
+        font-size: 1.5rem;
+        margin: 20px 0;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .hamburger.active div:nth-child(1) {
+        transform: rotate(45deg) translateY(10px);
+      }
+
+      .hamburger.active div:nth-child(2) {
+        opacity: 0;
+      }
+
+      .hamburger.active div:nth-child(3) {
+        transform: rotate(-45deg) translateY(-10px);
+      }
+
+      nav.active {
+        display: flex;
+      }
+
+      .main textarea {
+        width: 80%;
+      }
+
+      .footer p {
+        font-size: 12px;
       }
     }
 
     @media (min-width: 600px) {
-      .divb {
-        padding: 0 30px;
-      }
-
-      .nav-links {
-        display: flex;
-        flex-direction: row;
-        gap: 30px;
-      }
-
       #labels {
         grid-template-columns: repeat(2, 1fr);
         gap: 15px;
@@ -190,12 +234,10 @@
 
       textarea {
         width: 80%;
-        border-radius: 20px;
       }
 
       button {
         width: 60%;
-        border-radius: 20px;
       }
     }
 
@@ -214,20 +256,6 @@
     }
 
     @media (min-width: 900px) {
-      .divb {
-        height: 80px;
-        padding: 0 50px;
-      }
-
-      .logo-container img {
-        height: 55px;
-      }
-
-      .nav-links {
-        gap: 100px;
-        margin-left: -1300px;
-      }
-
       #labels {
         grid-template-columns: repeat(3, 1fr);
         column-gap: 20px;
@@ -237,12 +265,10 @@
 
       textarea {
         width: 850px;
-        border-radius: 30px;
       }
 
       button {
         width: 350px;
-        border-radius: 30px;
       }
 
       button:nth-child(3) {
@@ -262,7 +288,6 @@
         background-color: rgb(255, 255, 255);
       }
 
-      .divb,
       textarea,
       button,
       h1,
@@ -292,39 +317,23 @@
       }
     }
 
-    .mybutton {
-      padding: 10px 20px;
-      background-color: #4248f5;
-      color: white;
-      border: 2px solid white;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .mybutton:hover {
-      background-color: rgb(0, 255, 42);
-    }
   </style>
 </head>
 
 <body>
-  <div class="divb">
-    <div class="logo-container">
-      <img
-        src="https://lh3.googleusercontent.com/tTbnpxBlF2ymAwmxu3kszfV7vnRXK8vDELSTjSRAvICkC3bPWpFit-KaYz1XaZPgrGHV8LJ28OK8wJjOxw=s265-w265-h265"
-        alt="Shaffrose Logo">
+  <header>
+    <img src="./C-_Users_USER_Downloads_FI-LOGO.png" alt="">
+    <nav>
+      <a href="home.html">Home</a>
+      <a href="sorter.html">A-Sorter</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="hamburger" onclick="toggleMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
     </div>
-    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-    <div class="nav-links" id="navMenu">
-      <p>Home</p>
-      <p>Product</p>
-      <p>About</p>
-      <p onclick="logout()">Logout</p> <!-- 👈 This is new -->
-    </div>
-    
-    
- 
-  </div>
+  </header>
 
   <div class="main">
     <u style="color: white;">
@@ -335,25 +344,12 @@
     <button onclick="generateLabels()" class="mybutton">Generate Labels</button>
     <button onclick="window.print()" class="mybutton">Print Labels</button>
 
-
-
     <div id="labels"></div>
   </div>
 
-  <div class="footer" style="
-  height: 60px; 
-  width: 100%; 
-  background-color: #fff; 
-  display: flex; 
-  flex-direction: column; 
-  justify-content: center; 
-  align-items: center;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-">
-    <p style="font-size: 15px; font-weight: bold; margin: 0;">Copyright © 2025 Powered By SHAFFROSE ®</p>
-    <p style="font-size: 15px; font-weight: bold; margin: 3px 0 0 0;">Designed by Shahzad Edathingal</p>
+  <div class="footer">
+    <p>Copyright © 2025 Powered By SHAFFROSE ®</p>
+    <p>Designed by Shahzad Edathingal</p>
   </div>
 
   <script>
@@ -404,27 +400,21 @@
     }
 
     function transliterateToManglish(text) {
-      // First handle compound letters (conjuncts)
       const compoundLetters = {
         'ക്ക': 'kka', 'ക്ഷ': 'ksha', 'ഗ്ഗ': 'gga', 'ങ്ങ': 'nga',
         'ച്ച': 'ccha', 'ജ്ജ': 'jja', 'ഞ്ഞ': 'nja', 'ട്ട': 'tta',
         'ണ്ണ': 'nna', 'ത്ത': 'tha', 'ദ്ദ': 'dda', 'ദ്ധ': 'ddha',
-        'ന്ന': 'nna', 'ന്ത': 'ntha', 'ന്ദ': 'nda', 'മ്മ': 'mma', 
-        'മ്പ': 'mpa', 'പ്പ': 'ppa', 'വ്വ': 'vva', 'ല്ല': 'lla', 
-        'ള്ള': 'lla', 'ശ്ശ': 'sha', 'സ്സ': 'ssa', 'ഹ്മ': 'hma', 
+        'ന്ന': 'nna', 'ന്ത': 'ntha', 'ന്ദ': 'nda', 'മ്മ': 'mma',
+        'മ്പ': 'mpa', 'പ്പ': 'ppa', 'വ്വ': 'vva', 'ല്ല': 'lla',
+        'ള്ള': 'lla', 'ശ്ശ': 'sha', 'സ്സ': 'ssa', 'ഹ്മ': 'hma',
         '്ര': 'ra', '്യ': 'ya', '്ല': 'la', '്വ': 'va', 'ന്റ': 'nta',
-        // Add more compound letters as needed
       };
 
-      // Then handle single characters
       const malayalamToManglish = {
-        // Vowels and vowel signs
         'അ': 'a', 'ആ': 'aa', 'ഇ': 'i', 'ഈ': 'ee', 'ഉ': 'u', 'ഊ': 'oo',
         'ഋ': 'ru', 'എ': 'e', 'ഏ': 'e', 'ഐ': 'ai', 'ഒ': 'o', 'ഓ': 'oo', 'ഔ': 'au',
         'ാ': 'aa', 'ി': 'i', 'ീ': 'ee', 'ു': 'u', 'ൂ': 'oo', 'ൃ': 'ru',
         'െ': 'e', 'േ': 'e', 'ൈ': 'ai', 'ൊ': 'o', 'ോ': 'o', 'ൌ': 'au',
-
-        // Consonants
         'ക': 'ka', 'ഖ': 'kha', 'ഗ': 'ga', 'ഘ': 'gha', 'ങ': 'nga',
         'ച': 'cha', 'ഛ': 'chha', 'ജ': 'ja', 'ഝ': 'jha', 'ഞ': 'nya',
         'ട': 'tta', 'ഠ': 'ttha', 'ഡ': 'dda', 'ഢ': 'ddha', 'ണ': 'nna',
@@ -432,45 +422,20 @@
         'പ': 'pa', 'ഫ': 'pha', 'ബ': 'ba', 'ഭ': 'bha', 'മ': 'ma',
         'യ': 'ya', 'ര': 'ra', 'ല': 'la', 'വ': 'va', 'ശ': 'sha',
         'ഷ': 'sha', 'സ': 'sa', 'ഹ': 'ha', 'ള': 'la', 'ഴ': 'zha', 'റ': 'ra',
-
-        // Chillus and other signs
-        'ൽ': 'l', 'ൾ': 'l', 'ൺ': 'n', 'ൻ': 'n', 'ർ': 'r', 'ൿ': 'k',
-        '്': '', // Virama (removes inherent vowel)
-
-        // Numbers
-        '൦': '0', '൧': '1', '൨': '2', '൩': '3', '൪': '4',
-        '൫': '5', '൬': '6', '൭': '7', '൮': '8', '൯': '9',
-
-        // Punctuation
-        '।': '.', '॥': '.', '?': '?', '!': '!', ',': ',', ';': ';', ':': ':',
-        '(': '(', ')': ')', '[': '[', ']': ']', '{': '{', '}': '}'
+        'ൽ': 'l', 'ൾ': 'l', 'ൺ': 'n', 'ൻ': 'n', '്': '',
+        'ൿ': 'k'
       };
 
-
-      // First replace compound letters
-      Object.keys(compoundLetters).forEach(key => {
-        text = text.replace(new RegExp(key, 'g'), compoundLetters[key]);
-      });
-
-      // Then replace single characters
       return text.split('').map(char => malayalamToManglish[char] || char).join('');
     }
 
-
     function toggleMenu() {
-  const navMenu = document.getElementById("navMenu");
-  navMenu.classList.toggle("show");
-}
-
-
-function logout() {
-  // Clear session data if any (e.g., localStorage or sessionStorage)
-  localStorage.clear();
-  sessionStorage.clear();
-
-  // Redirect to login page
-  window.location.href = 'index.html'; // 👈 Change this to your actual login page
-}
-
-    
+      const menu = document.querySelector('nav');
+      const hamburger = document.querySelector('.hamburger');
+      menu.classList.toggle('active');
+      hamburger.classList.toggle('active');
+    }
   </script>
+</body>
+
+</html>
