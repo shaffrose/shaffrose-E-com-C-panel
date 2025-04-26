@@ -178,7 +178,7 @@
       gap: 8px; 
       margin-bottom: 15px; 
       width: 10%; 
-      flex-wrap: wrap; 
+   
       justify-content: center; 
     }
     .button-group button { 
@@ -241,11 +241,13 @@
       .button-group { 
         flex-direction: row; 
         flex-wrap: nowrap; 
+        
       }
       h1.page-title { 
         font-size: 1.5rem; 
       }
     }
+   
   </style>
 </head>
 <body>
@@ -267,7 +269,7 @@
   <div class="main">
     <h1 class="page-title">SAVED ADDRESS LABEL</h1>
     
-    <div class="button-group">
+    <div class="button-group" style="flex-direction: row; justify-content: center; align-items: center;">
       <button onclick="window.print()" style="margin-top: 5px; background-color: #FFDB58; border-radius: 5px;">Print Labels</button>
       <button class="delete-btn" onclick="deleteAllLabels()">Delete All</button>
     </div>
