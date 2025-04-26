@@ -1,261 +1,236 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Saved Address Labels</title>
   <style>
-    body { 
-      background-color: rgb(39, 39, 39); 
-      font-family: sans-serif; 
-      margin: 0; 
-      padding: 0; 
+    body {
+      background-color: rgb(39, 39, 39);
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
     }
-    header { 
-      padding: 10px 15px; 
-      display: flex; 
-      justify-content: space-between; 
-      align-items: center; 
-      background-color: #000; 
-      position: fixed; 
-      top: 0; 
-      left: 0; 
-      right: 0; 
-      z-index: 10; 
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); 
+    header {
+      padding: 10px 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #000;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
     }
-    header img { 
-      height: 35px; 
-      width: auto; 
+    header img {
+      height: 35px;
+      width: auto;
     }
-    header h1 { 
-      color: #FFDB58; 
-      font-size: 1.1rem; 
-      font-weight: 700; 
-      margin: 0; 
+    header h1 {
+      color: #FFDB58;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin: 0;
       display: none;
-      order: 1; 
-      width: 100%; 
-      text-align: center; 
-      margin-top: 5px; 
+      order: 1;
+      width: 100%;
+      text-align: center;
     }
-    nav { 
-      display: none; 
-      flex-direction: column; 
-      gap: 15px; 
-      position: fixed; 
-      top: 0; 
-      left: 0; 
-      right: 0; 
-      bottom: 0; 
-      background-color: rgba(0, 0, 0, 0.95); 
-      justify-content: center; 
-      align-items: center; 
-      z-index: 5; 
+    nav {
+      display: none;
+      flex-direction: column;
+      gap: 15px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.95);
+      justify-content: center;
+      align-items: center;
+      z-index: 5;
     }
-    nav.active { 
-      display: flex; 
+    nav.active {
+      display: flex;
     }
-    nav a { 
-      color: #fff; 
-      text-decoration: none; 
-      font-weight: 600; 
-      font-size: 1.2rem; 
-      margin: 10px 0; 
-      padding: 10px 20px; 
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.2rem;
+      margin: 10px 0;
+      padding: 10px 20px;
     }
-    nav a:hover { 
-      color: #FFDB58; 
+    nav a:hover {
+      color: #FFDB58;
     }
-    .hamburger { 
-      display: flex; 
-      flex-direction: column; 
-      gap: 5px; 
-      cursor: pointer; 
-      padding: 8px; 
-      margin-left: auto; 
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 8px;
+      margin-left: auto;
     }
-    .hamburger div { 
-      width: 25px; 
-      height: 3px; 
-      background-color: #fff; 
-      border-radius: 5px; 
-      transition: all 0.3s ease; 
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background-color: #fff;
+      border-radius: 5px;
+      transition: all 0.3s ease;
     }
-    .main { 
-      display: flex; 
-      flex-direction: column; 
-      justify-content: center; 
-      align-items: center; 
-      padding: 15px; 
-      margin-top: 60px; 
-      margin-bottom: 60px; 
-      width: 100%; 
-      box-sizing: border-box; 
+    .main {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 15px;
+      margin-top: 60px;
+      margin-bottom: 60px;
+      width: 100%;
+      box-sizing: border-box;
     }
-    #labels { 
-      padding: 10px; 
-      display: grid; 
-      gap: 10px; 
-      width: 100%; 
-      max-width: 800px; 
-      box-sizing: border-box; 
+    #labels {
+      padding: 10px;
+      display: grid;
+      gap: 10px;
+      width: 100%;
+      max-width: 800px;
+      box-sizing: border-box;
     }
-    .label { 
-      padding: 12px; 
-      background-color: white; 
-      border-radius: 5px; 
-      border: 1px solid #ddd; 
-      display: grid; 
-      gap: 8px; 
-      position: relative; 
-      font-size: 0.9rem; 
+    .label {
+      padding: 12px;
+      background-color: white;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      display: grid;
+      gap: 8px;
+      position: relative;
+      font-size: 0.9rem;
     }
-    .label div { 
-      padding: 8px; 
-      background-color: #f9f9f9; 
-      border-radius: 5px; 
-      font-size: 0.9rem; 
-      font-weight: 600; 
-      word-break: break-word; 
+    .delete-btn {
+      background-color: red;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 0.9rem;
+      margin-top: 5px;
     }
-    .delete-btn { 
-      background-color: red; 
-      color: white; 
-      border: none; 
-      padding: 6px 12px; 
-      cursor: pointer; 
-      border-radius: 5px; 
-      font-size: 0.9rem; 
-      margin-top: 5px; 
+    .date-badge {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: #FFDB58;
+  color: #000;
+  padding: 4px 10px;       /* Increased padding */
+  border-radius: 10px;
+  font-size: 0.9rem;        /* Increased font size */
+  font-weight: bold;
+}
+
+    #noLabels {
+      color: white;
+      font-size: 1rem;
+      text-align: center;
+      padding: 20px;
     }
-    #noLabels { 
-      color: white; 
-      font-size: 1rem; 
-      text-align: center; 
-      padding: 20px; 
+    footer {
+      padding: 8px;
+      width: 100%;
+      background-color: #000;
+      color: white;
+      text-align: center;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      font-size: 0.7rem;
     }
-    footer { 
-      padding: 8px; 
-      width: 100%; 
-      background-color: #000; 
-      color: white; 
-      text-align: center; 
-      position: fixed; 
-      bottom: 0; 
-      left: 0; 
-      font-size: 0.7rem; 
+    footer p {
+      margin: 3px 0;
     }
-    footer p { 
-      margin: 3px 0; 
+    .search-container {
+      width: 100%;
+      max-width: 800px;
+      margin-bottom: 15px;
+      display: flex;
+      gap: 8px;
+      flex-direction: column;
     }
-    .search-container { 
-      width: 100%; 
-      max-width: 800px; 
-      margin-bottom: 15px; 
-      display: flex; 
-      gap: 8px; 
-      flex-direction: column; 
+    .search-container input {
+      flex: 1;
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      font-size: 0.9rem;
     }
-    .search-container input { 
-      flex: 1; 
-      padding: 10px; 
-      border-radius: 5px; 
-      border: none; 
-      font-size: 0.9rem; 
+    .search-container button {
+      padding: 10px;
+      background-color: #FFDB58;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 0.9rem;
     }
-    .search-container button { 
-      padding: 10px; 
-      background-color: #FFDB58; 
-      border: none; 
-      border-radius: 5px; 
-      cursor: pointer; 
-      font-weight: bold; 
-      font-size: 0.9rem; 
+    .button-group {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
     }
-    .button-group { 
-      display: flex; 
-      gap: 8px; 
-      margin-bottom: 15px; 
-      width: 10%; 
-   
-      justify-content: center; 
+    .button-group button {
+      min-width: 120px;
+      height: 40px;
+      font-size: 0.9rem;
     }
-    .button-group button { 
-      flex: 1; 
-      min-width: 120px; 
-      height: 40px; 
-      font-size: 0.9rem; 
+    h1.page-title {
+      color: #FFDB58;
+      font-size: 1.2rem;
+      font-weight: 700;
+      text-align: center;
+      margin: 10px 0 15px;
+      width: 100%;
     }
-    .date-badge { 
-      position: absolute; 
-      top: 5px; 
-      right: 5px; 
-      background-color: #FFDB58; 
-      color: #000; 
-      padding: 2px 6px; 
-      border-radius: 10px; 
-      font-size: 0.6rem; 
-      font-weight: bold; 
-    }
-    h1.page-title { 
-      color: #FFDB58; 
-      font-size: 1.2rem; 
-      font-weight: 700; 
-      text-align: center; 
-      margin: 10px 0 15px; 
-      width: 100%; 
-    }
-    
-    /* Desktop styles */
     @media (min-width: 769px) {
-      header { 
-        padding: 15px 20px; 
-        flex-wrap: nowrap; 
+      header h1 {
+        display: none;
       }
-      header h1 { 
-        display: none; 
+      nav {
+        display: flex;
+        position: static;
+        flex-direction: row;
+        background-color: transparent;
+        gap: 15px;
       }
-      nav { 
-        display: flex; 
-        position: static; 
-        flex-direction: row; 
-        background-color: transparent; 
-        gap: 15px; 
+      .hamburger {
+        display: none;
       }
-      nav a { 
-        font-size: 0.9rem; 
-        margin: 0; 
-        padding: 5px 0; 
+      .main {
+        margin-top: 70px;
+        margin-bottom: 70px;
       }
-      .hamburger { 
-        display: none; 
+      .search-container {
+        flex-direction: row;
       }
-      .main { 
-        margin-top: 70px; 
-        margin-bottom: 70px; 
-      }
-      .search-container { 
-        flex-direction: row; 
-      }
-      .button-group { 
-        flex-direction: row; 
-        flex-wrap: nowrap; 
-        
-      }
-      h1.page-title { 
-        font-size: 1.5rem; 
+      h1.page-title {
+        font-size: 1.5rem;
       }
     }
-   
   </style>
 </head>
 <body>
   <header>
-    <img src="./C-_Users_USER_Downloads_FI-LOGO.png" alt="Logo">
+    <img src="./C-_Users_USER_Downloads_FI-LOGO.png" alt="Logo" />
     <h1>Saved Address Labels</h1>
     <div class="hamburger" onclick="toggleMenu()">
-      <div></div><div></div><div></div>
+      <div></div>
+      <div></div>
+      <div></div>
     </div>
     <nav>
       <a href="home.html">Home</a>
@@ -268,20 +243,20 @@
 
   <div class="main">
     <h1 class="page-title">SAVED ADDRESS LABEL</h1>
-    
-    <div class="button-group" style="flex-direction: row; justify-content: center; align-items: center;">
-      <button onclick="window.print()" style="margin-top: 5px; background-color: #FFDB58; border-radius: 5px;">Print Labels</button>
+
+    <div class="button-group">
+      <button onclick="window.print()" style="background-color: #FFDB58; margin-top: 5px; border-radius: 6px;">Print Labels</button>
       <button class="delete-btn" onclick="deleteAllLabels()">Delete All</button>
     </div>
-    
+
     <div class="search-container">
-      <input type="text" id="searchInput" placeholder="Search by mobile or pincode...">
+      <input type="text" id="searchInput" placeholder="Search by mobile or pincode..." />
       <div style="display: flex; gap: 8px;">
         <button onclick="searchLabels()">Search</button>
         <button onclick="clearSearch()">Clear</button>
       </div>
     </div>
-    
+
     <div id="labels"></div>
     <p id="noLabels">No saved labels found.</p>
   </div>
@@ -292,153 +267,83 @@
   </footer>
 
   <script>
-    // Function to toggle the mobile menu
     function toggleMenu() {
       const nav = document.querySelector('nav');
       nav.classList.toggle('active');
     }
 
-    // Function to format phone number
-    function formatPhoneNumber(phone) {
-      if (!phone) return '';
-      if (phone.includes('mob-') || phone.includes('mob,')) {
-        return phone;
-      }
-      return `(mob-${phone})`;
-    }
-
-    // Function to format pincode
-    function formatPincode(pincode) {
-      if (!pincode) return '';
-      if (pincode.includes('pin-') || pincode.includes('pin,')) {
-        return pincode;
-      }
-      return `(pin-${pincode})`;
-    }
-
-    // Function to format date
-    function formatDate(dateString) {
-      if (!dateString) return '';
-      const date = new Date(dateString);
-      return date.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' });
-    }
-
-    // Function to load saved labels from localStorage and display them
     function loadSavedLabels(searchTerm = '') {
-      const savedLabels = JSON.parse(localStorage.getItem('saved_labels')) || [];
+      const savedLabels = JSON.parse(localStorage.getItem('d-list')) || [];
       const labelsDiv = document.getElementById('labels');
       const noLabelsMessage = document.getElementById('noLabels');
 
-      // Filter labels if search term exists
-      const filteredLabels = searchTerm 
+      const filteredLabels = searchTerm
         ? savedLabels.filter(label => {
-            const address = (label.address || '').toLowerCase().replace(/\s+/g, '');
-            const name = (label.name || '').toLowerCase().replace(/\s+/g, '');
-            const phone = (label.phone || '').toLowerCase().replace(/\s+/g, '');
-            const pincode = (label.pincode || '').toLowerCase().replace(/\s+/g, '');
+            const html = label.html?.toLowerCase().replace(/\s+/g, '') || '';
             const search = searchTerm.toLowerCase().replace(/\s+/g, '');
-            return address.includes(search) || name.includes(search) || phone.includes(search) || pincode.includes(search);
+            return html.includes(search);
           })
         : savedLabels;
 
       if (filteredLabels.length === 0) {
         noLabelsMessage.style.display = 'block';
-        noLabelsMessage.textContent = searchTerm 
-          ? 'No matching labels found.' 
+        noLabelsMessage.textContent = searchTerm
+          ? 'No matching labels found.'
           : 'No saved labels found.';
       } else {
         noLabelsMessage.style.display = 'none';
         labelsDiv.innerHTML = '';
-        
-        filteredLabels.forEach((labelData, index) => {
+        filteredLabels.forEach((label, index) => {
           const labelElement = document.createElement('div');
           labelElement.classList.add('label');
-          
-          // Format fields
-          const formattedPhone = formatPhoneNumber(labelData.phone || '');
-          const formattedPincode = formatPincode(labelData.pincode || '');
-          const formattedDate = formatDate(labelData.date || new Date().toISOString());
-          
+          const labelDate = label.date ? new Date(label.date).toLocaleDateString() : '';
           labelElement.innerHTML = `
-            <div><strong>Name:</strong> ${labelData.name || ''}</div>
-            <div><strong>Address:</strong> ${labelData.address || ''}</div>
-            <div><strong>Phone:</strong> ${formattedPhone}</div>
-            <div><strong>Pincode:</strong> ${formattedPincode}</div>
-            <div class="date-badge">${formattedDate}</div>
+            <div class="date-badge">${labelDate}</div>
+            ${label.html}
             <button class="delete-btn" onclick="deleteLabel(${index})">Delete</button>
           `;
-
           labelsDiv.appendChild(labelElement);
         });
       }
     }
 
-    // Function to search labels
     function searchLabels() {
       const searchTerm = document.getElementById('searchInput').value.trim();
       loadSavedLabels(searchTerm);
     }
 
-    // Function to clear search
     function clearSearch() {
       document.getElementById('searchInput').value = '';
       loadSavedLabels();
     }
 
-    // Function to delete a saved label from localStorage
     function deleteLabel(index) {
       if (confirm('Are you sure you want to delete this label?')) {
-        const savedLabels = JSON.parse(localStorage.getItem('saved_labels')) || [];
-        const searchTerm = document.getElementById('searchInput').value.trim();
-        if (searchTerm) {
-          const filteredLabels = savedLabels.filter(label => {
-            const address = (label.address || '').toLowerCase().replace(/\s+/g, '');
-            const name = (label.name || '').toLowerCase().replace(/\s+/g, '');
-            const phone = (label.phone || '').toLowerCase().replace(/\s+/g, '');
-            const pincode = (label.pincode || '').toLowerCase().replace(/\s+/g, '');
-            const search = searchTerm.toLowerCase().replace(/\s+/g, '');
-            return address.includes(search) || name.includes(search) || phone.includes(search) || pincode.includes(search);
-          });
-          const labelToDelete = filteredLabels[index];
-          const originalIndex = savedLabels.findIndex(label => 
-            label.name === labelToDelete.name && 
-            label.address === labelToDelete.address &&
-            label.date === labelToDelete.date
-          );
-          if (originalIndex !== -1) {
-            savedLabels.splice(originalIndex, 1);
-          }
-        } else {
-          savedLabels.splice(index, 1);
-        }
-        
-        localStorage.setItem('saved_labels', JSON.stringify(savedLabels));
-        loadSavedLabels(searchTerm);
+        const savedLabels = JSON.parse(localStorage.getItem('d-list')) || [];
+        savedLabels.splice(index, 1);
+        localStorage.setItem('d-list', JSON.stringify(savedLabels));
+        loadSavedLabels(document.getElementById('searchInput').value.trim());
       }
     }
 
-    // Function to delete all labels
     function deleteAllLabels() {
       if (confirm("Are you sure you want to delete ALL labels? This cannot be undone!")) {
-        localStorage.removeItem('saved_labels');
+        localStorage.removeItem('d-list');
         document.getElementById('labels').innerHTML = '';
         document.getElementById('noLabels').style.display = 'block';
         document.getElementById('noLabels').textContent = 'No saved labels found.';
       }
     }
 
-    // Function to logout and clear localStorage
     function logout(event) {
       event.preventDefault();
       localStorage.clear();
       window.location.replace("index.html");
     }
 
-    // Load labels when the page is loaded
-    window.onload = function() {
+    window.onload = function () {
       loadSavedLabels();
-      
-      document.getElementById('searchInput').addEventListener('keyup', function(event) {
+      document.getElementById('searchInput').addEventListener('keyup', function (event) {
         if (event.key === 'Enter') {
           searchLabels();
         }
