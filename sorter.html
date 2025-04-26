@@ -1,4 +1,4 @@
-<!DOCTYPE html>     
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <link rel="shortcut icon" href="./C-_Users_USER_Downloads_FI-LOGO.png" type="image/x-icon">
@@ -284,7 +284,7 @@
     
     @media print {
       @page {
-        margin: -10mm 5mm 5mm 5mm; /* Reduced margins for better space usage */
+        margin: -10mm 5mm 5mm 5mm;
       }
       
       header, nav, .hamburger, .search-container, .button-group, textarea, .footer, #searchInput, #addressCount, .main h1 {
@@ -429,7 +429,7 @@
       let addressPart = [];
   
       addressLines.forEach(line => {
-        line = line.toUpperCase(); // <-- CONVERT line to uppercase
+        line = line.toUpperCase();
         if (/(\+91[-\s]?|^)?\d{10}$/.test(line.replace('MOB-', ''))) {
           mobile = line.startsWith('MOB-') ? line : 'MOB-' + line.replace(/^(\+91[-\s]?|^)?/, '');
         } else if (/^\d{6}$/.test(line.replace('PIN-', ''))) {
@@ -450,7 +450,9 @@
       allAddresses.push({ 
         phone: mobile.replace('MOB-', ''), 
         address: 'TO\n' + addressPart.join('\n') + '\n' + pincode + '\n' + mobile, 
-        html: label.innerHTML 
+        html: label.innerHTML,
+        name: addressPart[0] || '', // First line as name
+        pincode: pincode.replace('PIN-', '')
       });
     }
   
@@ -479,14 +481,35 @@
   
     function saveToDList() {
       if (allAddresses.length === 0) {
-        alert('No addresses to save');
+        alert('No addresses to save!');
         return;
       }
-  
-      const savedLabels = JSON.parse(localStorage.getItem('savedLabels') || '[]');
-      savedLabels.push(...allAddresses);
-      localStorage.setItem('savedLabels', JSON.stringify(savedLabels));
-      alert('Labels saved to D-List');
+
+      try {
+const existing = JSON.parse(localStorage.getItem('d-list') || '[]');
+
+        const today = new Date().toISOString();
+        
+        const newLabels = allAddresses.map(address => ({
+          date: today,
+          phone: address.phone,
+          address: address.address,
+          html: address.html,
+          name: address.name,
+          pincode: address.pincode
+        }));
+
+        const updatedLabels = [...existing, ...newLabels];
+        localStorage.setItem('d-list', JSON.stringify(updatedLabels));
+        
+        alert(`${newLabels.length} label(s) successfully saved to D-List!`);
+        clearLabels();
+        
+        console.log('Saved data:', updatedLabels);
+      } catch (error) {
+        console.error('Error saving to D-List:', error);
+        alert('Error saving labels. Please check console for details.');
+      }
     }
   
     function logout(event) {
@@ -494,6 +517,5 @@
       alert('You have logged out');
     }
   </script>
-  
 </body>
 </html>
