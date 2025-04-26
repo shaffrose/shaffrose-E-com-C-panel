@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <link rel="shortcut icon" href="./C-_Users_USER_Downloads_FI-LOGO.png" type="image/x-icon">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Address Labels</title>
   <style>
+    /* Global styles */
     * {
       box-sizing: border-box;
       -webkit-tap-highlight-color: transparent;
@@ -31,7 +31,7 @@
       left: 0;
       right: 0;
       z-index: 10;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
     }
 
     header img {
@@ -150,6 +150,13 @@
       word-break: break-word;
     }
 
+    #addressCount {
+      font-size: 1.1rem;
+      color: #FFDB58;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
     .footer {
       padding: 10px;
       width: 100%;
@@ -166,7 +173,7 @@
       margin: 3px 0;
     }
 
-    /* Mobile Menu Styles */
+    /* Media Queries for Responsiveness */
     @media (max-width: 768px) {
       header {
         padding: 10px 15px;
@@ -182,80 +189,42 @@
         margin-top: 5px;
       }
 
-      @media (max-width: 768px) {
-  nav {
-    display: none;
-    flex-direction: column;
-    gap: 15px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.95);
-    width: 100%;
-    height: 100vh;
-    justify-content: center;
-    align-items: center;
-    z-index: 5;
-  }
-
-  /* Add this rule to show the navigation menu when active */
-  nav.active {
-    display: flex;
-  }
-
-  nav a {
-    font-size: 1.5rem;
-    margin: 15px 0;
-    padding: 10px 20px;
-  }
-
-  .hamburger {
-    display: flex;
-  }
-
-  .hero {
-    padding: 100px 15px 60px;
-  }
-
-  .hero h2 {
-    font-size: 1.8rem;
-  }
-
-  .feature {
-    width: 100%;
-  }
-
-  .btn-group {
-    flex-direction: column;
-  }
-
-  .btn {
-    width: 80%;
-    max-width: 250px;
-  }
-}
-
-      textarea {
-        font-size: 15px;
-        padding: 12px;
+      nav {
+        display: none;
+        flex-direction: column;
+        gap: 15px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.95);
+        justify-content: center;
+        align-items: center;
+        z-index: 5;
       }
 
-      button {
-        padding: 12px;
-        font-size: 0.95rem;
+      nav.active {
+        display: flex;
+      }
+
+      nav a {
+        font-size: 1.5rem;
+        margin: 15px 0;
+        padding: 10px 20px;
+      }
+
+      .hamburger {
+        display: flex;
       }
     }
 
-    /* Tablet Styles */
     @media (min-width: 600px) {
       #labels {
         grid-template-columns: repeat(2, 1fr);
       }
     }
 
-    /* Desktop Styles */
     @media (min-width: 900px) {
       #labels {
         grid-template-columns: repeat(3, 1fr);
@@ -276,7 +245,6 @@
       }
     }
 
-    /* Print Styles */
     @media print {
       header, .footer, button, textarea {
         display: none !important;
@@ -307,15 +275,11 @@
     }
   </style>
 </head>
-
 <body>
   <header>
     <img src="./C-_Users_USER_Downloads_FI-LOGO.png" alt="Logo">
-
     <div class="hamburger" onclick="toggleMenu()">
-      <div></div>
-      <div></div>
-      <div></div>
+      <div></div><div></div><div></div>
     </div>
     <nav>
       <a href="home.html">Home</a>
@@ -326,20 +290,17 @@
   </header>
 
   <div class="main">
-    <h1 style="color: #FFDB58; font-size: 1.5rem; font-weight: 700; text-align: center; margin-bottom: 15px;">
-      SORT ADDRESS
-    </h1>
-  
+    <h1 style="color: #FFDB58; font-size: 1.5rem; font-weight: 700; text-align: center; margin-bottom: 15px;">SORT ADDRESS</h1>
     <textarea id="addressInput" placeholder="Paste addresses here..."></textarea>
-  
     <div class="button-group">
       <button onclick="generateLabels()">Generate Labels</button>
       <button onclick="window.print()">Print Labels</button>
+      <button onclick="clearLabels()">Clear All Labels</button>
+      <button onclick="downloadLabels()">Download Labels</button>
     </div>
-  
+    <p id="addressCount" style="color: white;"></p>
     <div id="labels"></div>
   </div>
-  
 
   <div class="footer">
     <p>Copyright © 2025 Powered By SHAFFROSE ®</p>
@@ -347,14 +308,13 @@
   </div>
 
   <script>
-    // Generate Address Labels
     function generateLabels() {
       const input = document.getElementById('addressInput').value.trim();
       const addresses = input.split(/\n\s*\n/);
       const labelsDiv = document.getElementById('labels');
-
+      const addressCount = document.getElementById('addressCount');
       labelsDiv.innerHTML = '';
-
+      
       if (addresses.length === 1 && addresses[0] === '') {
         alert('Please enter at least one address');
         return;
@@ -363,78 +323,50 @@
       addresses.forEach(addr => {
         if (addr.trim() === '') return;
 
+        // Assume mobile number is at the end and pincode follows the number
+        const addressParts = addr.trim().split('\n');
+        const mobileNumber = addressParts.pop().trim(); // last line assumed to be mobile number
+        const pincode = addressParts.pop().trim(); // second last line assumed to be pincode
+        
         const label = document.createElement('div');
         label.className = 'label';
-
-        let processedAddress = addr.trim().split('\n').map((line, index) => {
-          if (index === 0) {
-            line = "TO, " + line.trim();
-          }
-
-          line = transliterateToManglish(line);
-          line = line.toUpperCase();
-
-          if (/^\d{6}$/.test(line) && !line.startsWith('PIN-')) {
-            line = 'PIN-' + line;
-          }
-
-          if (/^\+91\s?\d{10}$/.test(line) && !line.startsWith('MOB-')) {
-            line = 'MOB-' + line;
-          } else if (/^\d{10}$/.test(line) && !line.startsWith('MOB-')) {
-            line = 'MOB-' + line;
-          }
-
-          return line;
-        }).join('\n');
-
-        label.textContent = processedAddress;
+        
+        // Add the address parts with mobile and pincode separated onto different lines
+        label.innerHTML = addressParts.join('<br>') + '<br>' + mobileNumber + '<br>' + pincode;
+        
         labelsDiv.appendChild(label);
       });
+
+      // Show address count
+      addressCount.textContent = `${addresses.length} addresses processed`;
     }
 
-    // Logout Function
+    function clearLabels() {
+      document.getElementById('labels').innerHTML = '';
+      document.getElementById('addressInput').value = '';
+      document.getElementById('addressCount').textContent = '';
+    }
+
+    function downloadLabels() {
+      const labelsDiv = document.getElementById('labels');
+      let labelsText = '';
+      const labels = labelsDiv.querySelectorAll('.label');
+      
+      labels.forEach(label => {
+        labelsText += label.textContent + '\n\n';
+      });
+
+      const blob = new Blob([labelsText], { type: 'text/plain' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'address_labels.txt';
+      link.click();
+    }
+
     function logout(event) {
       event.preventDefault();
       localStorage.clear();
       window.location.replace("index.html");
-    }
-
-    // Transliterate Malayalam to Manglish
-    function transliterateToManglish(text) {
-      const malayalamToManglish = {
-        'അ': 'a', 'ആ': 'aa', 'ഇ': 'i', 'ഈ': 'ee', 'ഉ': 'u', 'ഊ': 'oo',
-        'ഋ': 'ru', 'എ': 'e', 'ഏ': 'e', 'ഐ': 'ai', 'ഒ': 'o', 'ഓ': 'oo', 'ഔ': 'au',
-        'ക': 'ka', 'ഖ': 'kha', 'ഗ': 'ga', 'ഘ': 'gha', 'ങ': 'nga',
-        'ച': 'cha', 'ഛ': 'chha', 'ജ': 'ja', 'ഝ': 'jha', 'ഞ': 'nya',
-        'ട': 'tta', 'ഠ': 'ttha', 'ഡ': 'dda', 'ഢ': 'ddha', 'ണ': 'nna',
-        'ത': 'tha', 'ഥ': 'thha', 'ദ': 'da', 'ധ': 'dha', 'ന': 'na',
-        'പ': 'pa', 'ഫ': 'pha', 'ബ': 'ba', 'ഭ': 'bha', 'മ': 'ma',
-        'യ': 'ya', 'ര': 'ra', 'ല': 'la', 'വ': 'va', 'ശ': 'sha',
-        'ഷ': 'sha', 'സ': 'sa', 'ഹ': 'ha', 'ള': 'la', 'ഴ': 'zha', 'റ': 'ra'
-      };
-
-      return text.split('').map(char => malayalamToManglish[char] || char).join('');
-    }
-
-    // Mobile Menu Toggle
-    function toggleMenu() {
-      const menu = document.querySelector('nav');
-      const hamburger = document.querySelector('.hamburger');
-      menu.classList.toggle('active');
-      hamburger.classList.toggle('active');
-      
-      // Close menu when clicking outside
-      if (menu.classList.contains('active')) {
-        document.addEventListener('click', closeMenuOnClickOutside);
-      } else {
-        document.removeEventListener('click', closeMenuOnClickOutside);
-      }
-    }
-
-    function closeMenuOnClickOutside(e) {
-      if (!e.target.closest('nav') && !e.target.closest('.hamburger')) {
-        toggleMenu();
-      }
     }
   </script>
 </body>
