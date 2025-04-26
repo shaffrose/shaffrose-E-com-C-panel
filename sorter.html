@@ -308,6 +308,12 @@
   </div>
 
   <script>
+    // Hamburger menu toggle function
+    function toggleMenu() {
+      const nav = document.querySelector('nav');
+      nav.classList.toggle('active');
+    }
+
     function generateLabels() {
       const input = document.getElementById('addressInput').value.trim();
       const addresses = input.split(/\n\s*\n/);
@@ -338,7 +344,7 @@
       });
 
       // Show address count
-      addressCount.textContent = `${addresses.length} addresses processed`;
+      addressCount.textContent = `${addresses.length} address(es) processed`;
     }
 
     function clearLabels() {
